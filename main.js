@@ -1,7 +1,7 @@
 
 (async () => {
     const app = new PIXI.Application();
-    await app.init({ canvas: document.getElementById('bg-canvas'), resizeTo: window, backgroundAlpha: 0, preference:'auto'});
+    await app.init({ canvas: document.getElementById('bg-canvas'), resizeTo: window, backgroundAlpha: 0});
     const stars = [];
     const starTexture = app.renderer.generateTexture(new PIXI.Graphics().circle(0, 0, 3).fill({ color: 0x4facfe, alpha: 0.5 }));
 
@@ -295,31 +295,7 @@ window.onclick = function (e) {
 // Mobile detect karne ka function
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-// Ticker ke andar Mouse Trail wali logic ko conditional banayein
-app.ticker.add(() => {
-    // Sirf Desktop par hi particles banayein
-    if (!isMobile && mouseX > 0 && mouseY > 0) {
-        const p = new PIXI.Sprite(pTexture);
-        p.x = mouseX; p.y = mouseY;
-        p.alpha = 1;
-        p.scale.set(Math.random() * 0.5 + 0.5);
-        p.vx = (Math.random() - 0.5) * 2;
-        p.vy = (Math.random() - 0.5) * 2;
-        app.stage.addChild(p);
-        particles.push(p);
-    }
 
-    // Particles update and cleanup (Ye dono par chalega taaki purane particles remove ho sakein)
-    for (let i = particles.length - 1; i >= 0; i--) {
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        p.alpha -= 0.02;
-        if (p.alpha <= 0) {
-            app.stage.removeChild(p);
-            particles.splice(i, 1);
-        }
-    }
-});
 
 // Custom Cursor ko bhi sirf Desktop par enable karein
 if (!isMobile) {
