@@ -1,6 +1,7 @@
+
 (async () => {
     const app = new PIXI.Application();
-    await app.init({ canvas: document.getElementById('bg-canvas'), resizeTo: window, backgroundAlpha: 0 });
+    await app.init({ canvas: document.getElementById('bg-canvas'), resizeTo: window, backgroundAlpha: 0, preference:'auto'});
     const stars = [];
     const starTexture = app.renderer.generateTexture(new PIXI.Graphics().circle(0, 0, 3).fill({ color: 0x4facfe, alpha: 0.5 }));
 
@@ -41,6 +42,48 @@ function toggleGames() {
     else { h.style.display = 'none'; b.innerHTML = 'View All Games ▼'; document.getElementById('projects').scrollIntoView({ behavior: 'smooth' }); }
 }
 
+// --- STABLE EXTERNAL SOUND LINKS ---
+const sounds = {
+    // 1. Background Music (Calm Synth)
+    bg: new Howl({
+        src: ['https://cdn.pixabay.com/audio/2022/01/18/audio_d0c6ff1da4.mp3'],
+        loop: true,
+        volume: 0.15,
+        html5: true
+    }),
+    // 2. Shooting Sound (Laser/Pop)
+    shoot: new Howl({
+        src: ['https://freesound.org/data/previews/341/341695_5858296-lq.mp3'],
+        volume: 0.4
+    }),
+    // 3. Bubble Pop Sound (Water/Plop)
+    pop: new Howl({
+        src: ['https://freesound.org/data/previews/411/411642_5121236-lq.mp3'],
+        volume: 0.5
+    }),
+    // 4. Click Sound (UI)
+    click: new Howl({
+        src: ['https://freesound.org/data/previews/256/256113_3263906-lq.mp3'],
+        volume: 0.3
+    }),
+    // 5. Game Over (Dull Thud)
+    gameOver: new Howl({
+        src: ['https://freesound.org/data/previews/173/173859_2518933-lq.mp3'],
+        volume: 0.6
+    })
+};
+
+// Mute logic waisi hi rahegi
+let isMuted = false;
+function toggleMute() {
+    isMuted = !isMuted;
+    Howler.mute(isMuted);
+    const btn = document.getElementById('muteBtn');
+    if(btn) {
+        btn.innerHTML = isMuted ? "🔇 Unmute" : "🔊 Mute";
+        btn.style.background = isMuted ? "#e74c3c" : "#555";
+    }
+}
 // --- UI LOGIC ---
 function openSkills() {
      document.getElementById("skillsModal").style.display = "block"; 
@@ -50,9 +93,14 @@ function closeSkills() {
      document.getElementById("skillsModal").style.display = "none"; 
 }
 function openGame() { 
-    document.getElementById("gameModal").style.display = "block"; resetGame();
+    sounds.click.play(); // Play click
+    sounds.bg.play();    // Start BG Music
+    document.getElementById("gameModal").style.display = "block";
+     resetGame();
 }
 function closeGame() { 
+    sounds.click.play();
+    sounds.bg.stop();
     document.getElementById("gameModal").style.display = "none";
 }
 window.onclick = function (e) { 
@@ -119,7 +167,10 @@ canvas.addEventListener('mousemove', (e) => {
 });
 
 canvas.addEventListener('mousedown', () => {
-    if (!bullet && !isGameOver) bullet = { x: canvas.width / 2, y: canvas.height - 30, vx: Math.cos(angle) * 15, vy: Math.sin(angle) * 15, color: currentBubbleColor };
+    if (!bullet && !isGameOver) {
+        sounds.shoot.play(); // Shooting sound
+        bullet = { x: canvas.width / 2, y: canvas.height - 30, vx: Math.cos(angle) * 15, vy: Math.sin(angle) * 15, color: currentBubbleColor };
+    }
 });
 
 function snapToGrid(b) {
@@ -221,6 +272,65 @@ function resetGame() {
     init();
 
 }
+// Modal Functions
+function openExperience() {
+    if(typeof sounds !== 'undefined') sounds.click.play();
+    document.getElementById("experienceModal").style.display = "block";
+}
 
+function closeExperience() {
+    if(typeof sounds !== 'undefined') sounds.click.play();
+    document.getElementById("experienceModal").style.display = "none";
+}
+
+// Window click logic (Pehele wale window.onclick ko update karein)
+window.onclick = function (e) { 
+    if (e.target.className === 'modal') { 
+        closeSkills(); 
+        closeGame();
+        closeExperience(); // Naya add kiya
+    } 
+}
+
+// Mobile detect karne ka function
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+// Ticker ke andar Mouse Trail wali logic ko conditional banayein
+app.ticker.add(() => {
+    // Sirf Desktop par hi particles banayein
+    if (!isMobile && mouseX > 0 && mouseY > 0) {
+        const p = new PIXI.Sprite(pTexture);
+        p.x = mouseX; p.y = mouseY;
+        p.alpha = 1;
+        p.scale.set(Math.random() * 0.5 + 0.5);
+        p.vx = (Math.random() - 0.5) * 2;
+        p.vy = (Math.random() - 0.5) * 2;
+        app.stage.addChild(p);
+        particles.push(p);
+    }
+
+    // Particles update and cleanup (Ye dono par chalega taaki purane particles remove ho sakein)
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx; p.y += p.vy;
+        p.alpha -= 0.02;
+        if (p.alpha <= 0) {
+            app.stage.removeChild(p);
+            particles.splice(i, 1);
+        }
+    }
+});
+
+// Custom Cursor ko bhi sirf Desktop par enable karein
+if (!isMobile) {
+    const cursor = document.createElement('div');
+    cursor.id = 'custom-cursor';
+    document.body.appendChild(cursor);
+
+    window.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+}
 init();
 requestAnimationFrame(gameLoop);

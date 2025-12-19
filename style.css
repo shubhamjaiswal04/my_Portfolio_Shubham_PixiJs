@@ -667,4 +667,180 @@ header {
         #next-bubble-preview { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ccc; margin: 10px 0;}
         .game-btn { padding: 10px 20px; background: var(--accent); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
 
+    /* Email Button Hover Color */
+.social-btn.email-btn:hover {
+    border-color: #ea4335;
+    box-shadow: 0 0 15px rgba(234, 67, 53, 0.3);
+}
+
+.social-btn.email-btn:hover svg {
+    fill: #ea4335;
+}
+
+/* Instagram Hover */
+.social-btn.insta-btn:hover {
+    border-color: #e4405f;
+    box-shadow: 0 0 15px rgba(228, 64, 95, 0.4);
+}
+.social-btn.insta-btn:hover svg { fill: #e4405f; }
+
+/* Facebook Hover */
+.social-btn.fb-btn:hover {
+    border-color: #1877f2;
+    box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
+}
+.social-btn.fb-btn:hover svg { fill: #1877f2; }
+
+/* Twitter (X) Hover */
+.social-btn.x-btn:hover {
+    border-color: #ffffff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}
+.social-btn.x-btn:hover svg { fill: #ffffff; }
+
+/* YouTube Hover */
+.social-btn.yt-btn:hover {
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+.social-btn.yt-btn:hover svg { fill: #ff0000; }
+
+
+        /* Email Floating Button Style 
+.float-email {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 100px; /* Isse WhatsApp ke upar rakhne ke liye distance badhaya hai 
+    right: 30px;
+    background-color: #ea4335; /* Gmail Red Color */
+    /* color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px #999;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.float-email:hover {
+    transform: scale(1.1);
+    background-color: #c5221f;
+} */
+
+/* Optional: Email pulse animation (Green ki jagah Red) */
+/* .float-email {
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(234, 67, 53, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(234, 67, 53, 0); }
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Experience Button Style */
+.exp-btn {
+    background: transparent;
+    border: 2px solid var(--neon-purple);
+    color: var(--neon-purple);
+}
+
+.exp-btn:hover {
+    background: var(--neon-purple);
+    color: black;
+    box-shadow: 0 0 15px var(--neon-purple);
+}
+
+/* Experience Modal Layout */
+.exp-body {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.exp-item {
+    border-left: 3px solid var(--neon-blue);
+    padding-left: 20px;
+    margin-bottom: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 0 10px 10px 0;
+}
+
+.exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.duration {
+    color: var(--slot-gold);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.company-name {
+    color: #bbb;
+    font-weight: bold;
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.exp-roles {
+    margin-top: 10px;
+    color: #ddd;
+    font-size: 0.95rem;
+    padding-left: 20px;
+}
+
+.exp-roles li {
+    margin-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+
+.tech-stack-mini { margin-top: 15px; }
+.bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--neon-blue); margin-bottom: 4px; }
+.progress-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+.progress-fill { 
+    background: linear-gradient(to right, var(--neon-purple), var(--neon-blue)); 
+    height: 100%; 
+    box-shadow: 0 0 10px var(--neon-blue);
+    transition: width 1.5s ease-in-out;
+}
+
+/* Mobile par custom cursor hide karein */
+@media (max-width: 900px) {
+    body { cursor: auto !important; }
+    #custom-cursor { display: none !important; }
     
+    /* Mobile par progress bars ko thoda bada karein taaki readablity achi ho */
+    .progress-bg { height: 10px; }
+    .exp-header { flex-direction: column; align-items: flex-start; }
+}
