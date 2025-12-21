@@ -63,7 +63,6 @@ header {
     transform: translateY(50px);
     animation: slideUpFade 0.8s ease-out forwards;
     white-space: nowrap;
-    /* Force name in one line */
 }
 
 .hero-subtitle {
@@ -961,4 +960,151 @@ textarea.form-input {
 .edu-item:hover {
     background: rgba(255, 215, 0, 0.1);
     transform: translateX(5px);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* mobile responsive*/
+
+/* --- MOBILE RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column-reverse !important; /* Image upar, text niche */
+        padding-top: 60px !important;
+        text-align: center;
+        min-height: auto !important;
+    }
+
+    .hero-text {
+        padding-right: 0 !important;
+        margin-top: 20px;
+    }
+
+    .hero-name {
+        font-size: 2.8rem !important; /* Font size chota kiya */
+        white-space: normal !important; /* Name wrap ho sake */
+        line-height: 1.2;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem !important;
+    }
+
+    /* Profile Pic scaling for mobile */
+    .profile-pic {
+        width: 200px !important;
+        height: 200px !important;
+    }
+
+    .glow-ring {
+        width: 220px !important;
+        height: 220px !important;
+    }
+
+    /* --- MODAL MOBILE FIX --- */
+    .modal-content {
+        width: 95% !important;
+        margin: 10% auto !important;
+        max-height: 85vh; /* Screen se bahar na jaye */
+        overflow-y: auto !important; /* Scroll enable kiya */
+    }
+
+    .modal-body {
+        grid-template-columns: 1fr !important; /* Skills/Edu ek line mein */
+        padding: 15px !important;
+    }
+
+    /* Buttons groups center align */
+    .btn-group {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn {
+        padding: 10px 20px !important;
+        font-size: 0.9rem !important;
+        width: 100%; /* Mobile par full width buttons better lagte hain */
+    }
+
+    /* Experience & Education list fix */
+    .exp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+}
+
+/* Landscape/Tablet Fix */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero-name { font-size: 4rem !important; }
+    .profile-pic { width: 280px !important; height: 280px !important; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- RESPONSIVE FIXES --- */
+@media (max-width: 768px) {
+    /* Profile Image Container */
+    .hero-img-container {
+        flex: 0 0 auto !important;
+        width: 100% !important;
+        padding-left: 0 !important;
+        justify-content: center !important;
+    }
+
+    .profile-pic {
+        width: clamp(200px, 50vw, 300px) !important;
+        height: clamp(200px, 50vw, 300px) !important;
+    }
+
+    .glow-ring {
+        width: clamp(220px, 55vw, 320px) !important;
+        height: clamp(220px, 55vw, 320px) !important;
+    }
+
+    /* Modal Responsiveness */
+    .modal-content {
+        width: 95% !important;
+        margin: 5% auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+
+    /* Game UI Panel */
+    .game-wrapper {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+
+    .ui-panel {
+        width: 100% !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        margin-top: 10px;
+    }
 }

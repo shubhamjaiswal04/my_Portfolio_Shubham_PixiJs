@@ -120,6 +120,8 @@ window.onclick = function (e) {
     } 
 }
 
+
+
 // --- ------------------------------------------------------BUBBLE MASTER GAME ENGINE ---
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -283,6 +285,13 @@ function resetGame() {
     init();
 
 }
+
+
+
+
+
+
+
 // Modal Functions
 function openExperience() {
     if(typeof sounds !== 'undefined') sounds.click.play();
