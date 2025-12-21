@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.x/dist/pixi.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./style.css">
 </head>
@@ -19,15 +20,42 @@
         <header>
             <div class="hero-text">
                 <h1 class="hero-name">Shubham Jaiswal</h1>
-                <div class="hero-subtitle">
+                <!-- <div class="hero-subtitle">
                     Senior Software Engineer | <span class="highlight">PixiJS v8 Specialist</span><br>
                     Building High-Performance Slot & Casino Games.
+                </div> -->
+                <div class="hero-subtitle">
+                    <span id="typing-text" class="highlight"></span>
+                    <span style="color: var(--neon-blue); font-size: 1.2rem; margin-left: 10px;">
+                        📍 Noida, India
+                    </span> <br>
+                    <!-- <div class="specialization-container">
+                        <span class="spec-tag">🎰 Slot Games</span>
+                        <span class="spec-tag">💎 Progressive Jackpots</span>
+                        <span class="spec-tag">⚙️ RNG Integration</span>
+                        <span class="spec-tag">💻 .NET Management</span>
+                    </div> -->
+                </div>
+                <div class="about-brief">
+                    <p>Senior Software Engineer with 4 years of experience in the gaming industry specializing in
+                        high-performance 2D games and logic-driven gameplay.I have successfully developed 20+ Slot Games
+                        using PixiJS, Proven ability to handle multiple
+                        assignments and excel in fast-paced, time-sensitive environments while maintaining high
+                        standards of quality. Possess a deep understanding of Game Trends, Design, Prototyping, and
+                        complex Logic Development.</br>
+
+                        A proactive learner motivated to grow within the Game Development industry, I bring excellent
+                        teamwork skills, flexibility, and the ability to work effectively both independently and in
+                        collaborative team settings to achieve project goals.
+
+                        .</p>
                 </div>
                 <div class="btn-group">
                     <a href="#projects" class="btn cta-btn">View Games</a>
                     <button onclick="openSkills()" class="btn skills-btn">Show Skills 🛠️</button>
                     <button onclick="openExperience()" class="btn exp-btn">Experience 💼</button>
-
+                    <button onclick="openContact()" class="btn skills-btn">Contact Me ✉️</button>
+                    <button onclick="openEducation()" class="btn resume-btn">Education 🎓</button>
                     <a href="./src/Resume/Shubham_Jaiswal_PixiJs_Resume.pdf" download class="btn resume-btn">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -38,6 +66,63 @@
                         Download Resume
                     </a>
                 </div>
+                <div id="educationModal" class="modal">
+                    <div class="modal-content" style="max-width: 600px;">
+                        <div class="modal-header">
+                            <h2>Academic Background</h2>
+                            <span class="close-btn" onclick="closeEducation()">&times;</span>
+                        </div>
+
+                        <div class="modal-body education-body">
+    <div class="edu-item">
+        <div class="exp-header">
+            <h3 class="highlight">Master of Computer Applications (MCA)</h3>
+            <span class="duration">2022 - 2024</span>
+        </div>
+        <div class="company-name">Indira Gandhi National Open University, Maidan Garhi, New Delhi,110068.</div>
+        <!-- <p style="color: #bbb; margin-top: 5px;">University Department / Affiliated College Name Yahan Dalein</p> -->
+    </div>
+
+    <div class="edu-item">
+        <div class="exp-header">
+            <h3 class="highlight">Bachelor of Computer Applications (BCA)</h3>
+            <span class="duration">2018 - 2021</span>
+        </div>
+        <div class="company-name">Ram Manohar Lohia Awadh University Ayodhya, U.P</div>
+        <p style="color: #bbb; margin-top: 5px;">Affiliated College: RRPG College Amethi</p>
+    </div>
+
+    <div class="edu-item">
+        <div class="exp-header">
+            <h3 class="highlight">Intermediate (12th) - Science Stream</h3>
+            <span class="duration">2016 - 2018</span>
+        </div>
+        <div class="company-name">S J B Singh Inter Collge Kakwa Amethi | UP Board</div>
+        <p style="color: #bbb; margin-top: 5px;">Focused on Physics, Chemistry and Mathematics.</p>
+    </div>
+
+    <div class="edu-item">
+        <div class="exp-header">
+            <h3 class="highlight">High School (10th)</h3>
+            <span class="duration">2016</span>
+        </div>
+        <div class="company-name">S J B Singh Inter Collge Kakwa Amethi | UP Board</div>
+        <p style="color: #bbb; margin-top: 5px;">Foundational Science and Mathematics.</p>
+    </div>
+</div>
+                        <!-- <div class="modal-body education-body">
+                            <div class="edu-item">
+                                <div class="exp-header">
+                                    <h3 class="highlight">Bachelor of Computer Applications (BCA)</h3>
+                                    <span class="duration">2018 - 2021</span>
+                                </div>
+                                <div class="company-name">Mahatma Gandhi Kashi Vidyapith (MGKVP)</div>
+                                <p style="color: #bbb; margin-top: 5px;">Focused on Software Engineering, Data
+                                    Structures, and Web Technologies.</p>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
                 <div id="experienceModal" class="modal">
                     <div class="modal-content" style="max-width: 800px;">
                         <div class="modal-header">
@@ -47,11 +132,11 @@
                         <div class="modal-body exp-body">
                             <div class="exp-item">
                                 <div class="exp-header">
-                                    <h3 class="highlight">Senior Software Developer</h3>
+                                    <h3 class="highlight">Senior Software Engineer</h3>
                                     <span class="duration">August 2024 - Present</span>
                                 </div>
-                                <div class="company-name">Chetu Inc</div>
-                                <div class="tech-stack-mini">
+                                <div class="company-name">Chetu Inc, Noida</div>
+                                <!-- <div class="tech-stack-mini">
                                     <div class="bar-label">PixiJS Optimization <span>95%</span></div>
                                     <div class="progress-bg">
                                         <div class="progress-fill" style="width: 95%;"></div>
@@ -61,11 +146,41 @@
                                     <div class="progress-bg">
                                         <div class="progress-fill" style="width: 90%;"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <ul class="exp-roles">
-                                    <li>Developed high-performance slot games using PixiJS v8 and GSAP.</li>
-                                    <li>Optimized game assets for mobile and web platforms.</li>
-                                    <li>Collaborated with artists to implement Spine 2D animations.</li>
+                                    <li>Developed Interactive 2D game and create game Lobby in Pixi JS for Hosting Games
+                                        and Integrated Routing. </li>
+                                    <li>Developed games i.e. Voodoo jackpot, Dinosaur cash, Utah Fortune, Supreme
+                                        Treasure, Yucatan Quest, ApeEmperor, Purple Nation, Bahama Rock, Panda Quest,
+                                        Talisman and
+                                        Hillside Manor game.</li>
+                                    <li>Collaborated with QA, designers, and backend engineers to integrate APIs and
+                                        real-time data, ensuring seamless synchronization across devices.</li>
+                                    <li>Implemented responsive design and adaptive layouts, improving accessibility and
+                                        gameplay consistency on both desktop and mobile platforms.</li>
+                                    <li>Demonstrated project progress to clients and project managers on a weekly basis,
+                                        ensuring alignment with project goals.</li>
+
+                                    <li>Optimized game performance by refining rendering pipelines and asset loading,
+                                        resulting in faster load times and smoother gameplay.</li>
+
+                                    <li>Collaborated with the GLI (Gaming Laboratories International) Team and clients
+                                        to achieve formal Game Certification.</li>
+
+                                    <li>Successfully integrated 52 legacy games into a newly developed, unified Game
+                                        Lobby.</li>
+
+                                    <li>Developed advanced gameplay features such as Free Spins, Blasting Reels, and
+                                        Blazing Reels.</li>
+
+                                    <li>Engineered complex mechanics including Sticky Wilds, Falling Wild Re-Spins, and
+                                        various Bonus Game features.</li>
+
+                                    <li>Integrated Sprite Sheet and Spine Animations seamlessly to enhance visual
+                                        fidelity and performance.</li>
+
+                                    <li>Debugged and resolved critical rendering and logic issues, significantly
+                                        reducing player-reported bugs during testing phases.</li>
                                 </ul>
                             </div>
 
@@ -75,7 +190,7 @@
                                     <span class="duration">Feb 2022 -July 2024 </span>
                                 </div>
                                 <div class="company-name">Chetu Inc</div>
-                                <div class="tech-stack-mini">
+                                <!-- <div class="tech-stack-mini">
                                     <div class="bar-label">PixiJS Optimization <span>95%</span></div>
                                     <div class="progress-bg">
                                         <div class="progress-fill" style="width: 95%;"></div>
@@ -85,10 +200,66 @@
                                     <div class="progress-bg">
                                         <div class="progress-fill" style="width: 90%;"></div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <ul class="exp-roles">
-                                    <li>Worked on HTML5 Canvas and JavaScript game logic.</li>
-                                    <li>Integrated REST APIs for multiplayer casino games.</li>
+                                    <li>Developed a robust Math Engine for 10 Sweepstake games, handling complex
+                                        probability calculations and payout structures.</li>
+
+                                    <li>Engineered a Console Application to simulate and verify Return to Player (RTP)
+                                        percentages, ensuring mathematical accuracy for 10 distinct game titles.</li>
+
+                                    <li>Developed interactive 2D game interfaces and animations using PixiJS,
+                                        significantly enhancing visual engagement and player experience.</li>
+
+                                    <li>Built 10 high-performance 2D slot games from scratch using PixiJS, JavaScript,
+                                        and HTML5/CSS3.</li>
+
+                                    <li>Engineered complex mechanics such as Fever-Re-spin, Sticky Wilds, Falling Wild
+                                        Re-Spins, and Diamond Multipliers.</li>
+
+                                    <li>Implemented advanced game logic including Ways Selection, Jackpot Selection, and
+                                        various interactive Bonus Wheel features.</li>
+
+                                    <li>Initiated early defect detection during the design and build phases through
+                                        proactive risk analysis, reducing overall project costs.</li>
+
+                                    <li>Performed comprehensive root cause analysis of defects in pre-production
+                                        environments to prevent bug propagation.</li>
+
+                                    <li>Developed and integrated "Community Jackpot" features to enhance player social
+                                        interaction and retention.</li>
+
+                                    <li>Collaborated with cross-functional teams to gather, analyze, and implement
+                                        complex client requirements effectively.</li>
+
+                                    <li>Executed clean, efficient, and maintainable code following industry best
+                                        practices for PixiJS and JavaScript development.</li>
+
+                                    <li>Performed rigorous unit testing and debugging to ensure optimal software
+                                        performance and maximum rendering optimization.</li>
+
+                                    <li>Participated in peer code reviews to maintain high code quality standards and
+                                        identify architectural improvements.</li>
+
+                                    <li>Integrated RESTful APIs and parsed complex data responses to dynamically
+                                        manipulate and display real-time game data on the front end.</li>
+
+
+                                    <li>Developed a comprehensive Game Management Portal to manage the complete business
+                                        hierarchy, including Owner, Admin, Distributor, Agent, and Store levels.</li>
+
+                                    <li>Engineered features to dynamically enable/disable games at the store level and
+                                        integrated a Weekly Purchase Limit feature using .NET MVC for better financial
+                                        control.</li>
+
+                                    <li>Built and maintained a POS (Point of Sale) Application to manage game reports,
+                                        player history, cashier transactions, and real-time financial tracking.</li>
+
+                                    <li>Implemented essential cashier features including creating mobile IDs and PINs
+                                        for new customers, adding play-credits, and processing amount redemptions.</li>
+
+                                    <li>Developed operational tools within the POS system such as Shift Reports, and
+                                        functionalities to add or edit store configurations seamlessly.</li>
                                 </ul>
                             </div>
 
@@ -97,7 +268,7 @@
                                     <h3 class="highlight">Trainee</h3>
                                     <span class="duration">Dec 2021 - Jan 2022</span>
                                 </div>
-                                <div class="company-name">Chetu Inc</div>
+                                <div class="company-name">Chetu Inc, Noida</div>
                                 <div class="tech-stack-mini">
                                     <div class="bar-label">PixiJS Optimization <span>95%</span></div>
                                     <div class="progress-bg">
@@ -120,6 +291,7 @@
                 </div>
             </div>
             <div class="hero-img-container">
+                <div class="glow-ring"></div>
                 <img src="./src/assets/pic.avif" alt="Shubham Profile" class="profile-pic">
             </div>
         </header>
@@ -127,7 +299,7 @@
         <div id="skillsModal" class="modal">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2>Skills</h2>
+                    <h2>TECHNICAL SKILLS</h2>
                     <span class="close-btn" onclick="closeSkills()">&times;</span>
                 </div>
                 <div class="modal-body">
@@ -139,7 +311,8 @@
                             <span class="skill-tag">.Net core</span>
                             <span class="skill-tag">MS-SQL Server</span><span class="skill-tag">HTML5 Canvas</span>
                             <span class="skill-tag">REST API Integration</span><span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform development</span>
+                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform
+                                development</span>
                             <span class="skill-tag">Game performance optimization</span><span
                                 class="skill-tag">Multitasking</span>
                             <span class="skill-tag">Problem Solving</span><span class="skill-tag">Communication</span>
@@ -151,23 +324,25 @@
 
                         </div>
                     </div>
-                    <!-- <div class="skill-category">
-                        <h3>Game Dev</h3>
-                        <div class="skill-list"><span class="skill-tag">Spine 2D Animation</span><span
-                                class="skill-tag">GSAP</span><span class="skill-tag">Slot Logic</span><span
-                                class="skill-tag">Slot Logic</span></div>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Tools</h3>
-                        <div class="skill-list"><span class="skill-tag">TFS</span><span
-                                class="skill-tag">Git</span><span class="skill-tag">VS Code</span><span
-                                class="skill-tag">SVN</span></div>
-                    </div> -->
                 </div>
             </div>
         </div>
 
+        <!-- <button onclick="openSlotGame()" class="btn cta-btn">Play Slot Demo 🎰</button> -->
 
+        <div id="slotModal" class="modal">
+            <div class="modal-content" style="max-width: 900px; background: #000;">
+                <div class="modal-header">
+                    <h2>PixiJS v8 Slot Engine</h2>
+                    <span class="close-btn" onclick="closeSlotGame()">&times;</span>
+                </div>
+                <div id="slot-container" style="width: 100%; height: 500px; position: relative;">
+                    <div id="slot-ui" style="position: absolute; bottom: 20px; width: 100%; text-align: center;">
+                        <button id="spinBtn" class="view-all-btn">SPIN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <h2 class="section-title" id="projects">Featured Portfolio for Games</h2>
         <div class="grid">
@@ -199,7 +374,7 @@
                     <!-- <div class="modal-header">
                 <h2 style="color:var(--accent)">Bubble Master Live Demo</h2>
                 <span class="close-btn" onclick="closeGame()">&times;</span>
-            </div> -->
+                  </div> -->
                     <div class="game-wrapper">
                         <canvas id="gameCanvas" width="400" height="600"></canvas>
                         <div class="ui-panel">
@@ -211,6 +386,8 @@
                         </div>
                     </div>
                 </div>
+
+
             </div>
             <div id="bubbleModal" class="modal">
                 <div class="modal-content" style="max-width: 650px;">
@@ -254,14 +431,24 @@
     <div class="card-img"><img src="./src/assets/ApeEmperor.png" loading="lazy"></div>
     <div class="card-content">
         <h3>Ape Emperor</h3>
-        <p>Physics-based spin wheel.</p>
+        <div class="feature-badges">
+            <span class="f-badge">🎰 5x3 Reel</span>
+            <span class="f-badge">🎁 Free Spins</span>
+            <span class="f-badge">💰 Multipliers</span>
+        </div>
+        <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
     </div>
 </div>
 <div class="card" onclick="playSpin(this)">
     <div class="card-img"><img src="./src/assets/dinosaur.png" loading="lazy"></div>
     <div class="card-content">
         <h3>Dinosaur Cash</h3>
-        <p>Multiplayer card game logic.</p>
+        <div class="feature-badges">
+            <span class="f-badge">🎰 5x3 Reel</span>
+            <span class="f-badge">🎁 Free Spins</span>
+            <span class="f-badge">💰 Multipliers</span>
+        </div>
+        <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
     </div>
 </div>
 <div class="card" onclick="playSpin(this)">
@@ -281,52 +468,82 @@
             <div class="card-img"><img src="./src/assets/supremeTreasure.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Supreme Treasure</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
             <div class="card-img"><img src="./src/assets/Luckypanda.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Lucky Panda</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/cracker (2).png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/cracker (2).png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Cracker</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Luxury.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Luxury.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Life of Luxury</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Utah.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Utah.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Utah Fortune</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/prosperity.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/prosperity.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Golden Prosperity</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Lucky Duck.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Lucky Duck.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Lucky Duck</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/bigBonus.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/bigBonus.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Big Bonus</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Talishman.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Talishman.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Talishman</h3>
             </div>
@@ -338,43 +555,43 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/HilsideManor.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/HilsideManor.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Hillside Manor</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Screenshot 2025-12-17 214247.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Screenshot 2025-12-17 214247.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Bahma Rock</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/PandaQuest.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/PandaQuest.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Panda Quest</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Lucky Ducky.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Lucky Ducky.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Lucky Ducky</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/fortune.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/fortune.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Lucky Fortune</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/fortuneshamrock.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/fortuneshamrock.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Fortune Shamrock</h3>
             </div>
         </div>
         <div class="card">
-            <div class="card-img"><img src="./src/assets/Yucatanquest.png"  loading="lazy"></div>
+            <div class="card-img"><img src="./src/assets/Yucatanquest.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Yucatan Quest</h3>
             </div>
@@ -429,22 +646,22 @@
                     </svg>
                 </a>
 
-
-                <a href="https://www.instagram.com/j.shubham___/" target="_blank" class="social-btn insta-btn"
+<!-- 
+                <a href="https://www.instagram.com//" target="_blank" class="social-btn insta-btn"
                     onclick="sounds.click.play()">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.669-.072-4.948-.2-4.358-2.617-6.78-6.979-6.98-1.281-.058-1.69-.072-4.949-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
-                </a>
+                </a> -->
 
-                <a href="https://www.facebook.com/profile.php?id=100024651500738" target="_blank"
+                <!-- <a href="https://www.facebook.com/profile.php?id=100024651500738" target="_blank"
                     class="social-btn fb-btn" onclick="sounds.click.play()">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.324v-21.35c0-.732-.593-1.325-1.325-1.325z" />
                     </svg>
-                </a>
+                </a> -->
 
                 <a href="https://x.com/Shubham24139548" target="_blank" class="social-btn x-btn"
                     onclick="sounds.click.play()">
@@ -454,17 +671,55 @@
                     </svg>
                 </a>
 
-                <a href="https://www.youtube.com/@jaiswalshubham9721" target="_blank" class="social-btn yt-btn"
+                <!-- <a href="https://www.youtube.com/@jaiswalshubham9721" target="_blank" class="social-btn yt-btn"
                     onclick="sounds.click.play()">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                     </svg>
-                </a>
+                </a> -->
 
             </div>
         </div>
     </div>
+    <!-- <button onclick="openContact()" class="btn skills-btn">Contact Me ✉️</button> -->
+
+    <div id="contactModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header">
+                <h2>Send Message</h2>
+                <span class="close-btn" onclick="closeContact()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form action="https://formspree.io/f/mrezqkew" method="POST" id="contactForm">
+                    <div class="input-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required placeholder="Enter your full name" class="form-input">
+                    </div>
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required placeholder="Enter you email" class="form-input">
+                    </div>
+                    <div class="input-group">
+                        <label>Message</label>
+                        <textarea name="message" rows="4" required placeholder="How can I help you?"
+                            class="form-input"></textarea>
+                    </div>
+                    <button type="submit" class="btn cta-btn" style="width: 100%; margin-top: 10px;">Send Message
+                        🚀</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="successModal" class="modal">
+        <div class="modal-content" style="max-width: 400px; text-align: center; padding: 30px;">
+            <div style="font-size: 50px; color: var(--neon-blue); margin-bottom: 20px;">✓</div>
+            <h2 style="color: var(--slot-gold);">Thank You!</h2>
+            <p>Your message has been sent to Shubham's inbox. 🚀</p>
+            <button onclick="closeSuccess()" class="btn cta-btn" style="margin-top: 20px;">Close</button>
+        </div>
+    </div>
+
     <div class="footer-bottom">&copy; 2025 Shubham Jaiswal | Built with Passion for Gaming.</div>
 </footer>
 
@@ -478,6 +733,8 @@
 
 <!--     called my JavaScript files -->
 <script src="./main.js"></script>
+<script src="./education.js"></script>
+<script src="./contact.js"></script>
 
 </body>
 

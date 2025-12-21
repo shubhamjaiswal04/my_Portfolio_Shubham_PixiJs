@@ -1,7 +1,18 @@
 
 (async () => {
     const app = new PIXI.Application();
-    await app.init({ canvas: document.getElementById('bg-canvas'), resizeTo: window, backgroundAlpha: 0});
+    await app.init({ 
+        canvas: document.getElementById('bg-canvas'), 
+        resizeTo: window, 
+        backgroundAlpha: 0,
+        antialias: true,
+        autoDensity: true, // Important for iOS/High DPI
+        resolution: window.devicePixelRatio || 1
+    });
+    // await app.init({ 
+    //     canvas: document.getElementById('bg-canvas'),
+    //      resizeTo: window, 
+    //      backgroundAlpha: 0});
     const stars = [];
     const starTexture = app.renderer.generateTexture(new PIXI.Graphics().circle(0, 0, 3).fill({ color: 0x4facfe, alpha: 0.5 }));
 
@@ -310,3 +321,58 @@ if (!isMobile) {
 }
 init();
 requestAnimationFrame(gameLoop);
+
+
+
+
+
+
+// GSAP Library CDN load kar lein index.html mein agar nahi hai toh
+// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+// Ensure GSAP is included in index.html
+// 1. Profile Glow Rotation
+gsap.to(".glow-ring", {
+    rotation: 360,
+    duration: 10,
+    repeat: -1,
+    ease: "none"
+});
+
+// 2. Typing Effect Logic
+const roles = ["Slot Game Developer", "PixiJS Developer"];
+let roleIndex = 0;
+let charIndex = 0;
+const target = document.getElementById("typing-text");
+
+function type() {
+    if (charIndex < roles[roleIndex].length) {
+        target.textContent += roles[roleIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 100);
+    } else {
+        setTimeout(erase, 2000);
+    }
+}
+
+function erase() {
+    if (charIndex > 0) {
+        target.textContent = roles[roleIndex].substring(0, charIndex - 1);
+        charIndex--;
+        setTimeout(erase, 50);
+    } else {
+        roleIndex = (roleIndex + 1) % roles.length;
+        setTimeout(type, 500);
+    }
+}
+
+// Start animation on load
+window.addEventListener('DOMContentLoaded', type);
+
+// 3. Inspect Element Protection (Right Click & Shortcuts)
+document.addEventListener('contextmenu', event => event.preventDefault()); // Right click block
+document.onkeydown = function(e) {
+    if(e.keyCode == 123) return false; // F12 block
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+    if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+    if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
+};
