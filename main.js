@@ -284,13 +284,32 @@ function draw() {
     fallingBubbles.forEach(b => drawBubble(b.x, b.y, b.color));
     if (bullet) drawBubble(bullet.x, bullet.y, bullet.color);
     if (!isGameOver) drawBubble(canvas.width / 2, canvas.height - 30, currentBubbleColor);
+    // if (isGameOver) {
+    //      ctx.fillStyle = 'rgba(0,0,0,0.7)'; 
+    //      ctx.fillRect(0, 0, 400, 600); 
+    //      ctx.fillStyle = 'white'; 
+    //      ctx.font = '40px Arial'; 
+    //      ctx.fillText('GAME OVER', 80, 300); 
+    //     }
     if (isGameOver) {
-         ctx.fillStyle = 'rgba(0,0,0,0.7)'; 
-         ctx.fillRect(0, 0, 400, 600); 
-         ctx.fillStyle = 'white'; 
-         ctx.font = '40px Arial'; 
-         ctx.fillText('GAME OVER', 80, 300); 
-        }
+    ctx.fillStyle = 'rgba(0,0,0,0.85)'; // Screen black/blank effect
+    ctx.fillRect(0, 0, canvas.width, canvas.height); 
+    
+    ctx.textAlign = "center";
+    ctx.shadowBlur = 25; // Glow intensity
+    ctx.shadowColor = "#00f2fe"; // Neon Blue glow
+    
+    ctx.fillStyle = '#00f2fe';
+    ctx.font = 'bold 45px Arial';
+    ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2 - 20); 
+
+    ctx.shadowColor = "#ffd700"; // Gold glow for score
+    ctx.fillStyle = '#ffd700';
+    ctx.font = 'bold 35px Arial';
+    ctx.fillText('YOUR SCORE: ' + score, canvas.width/2, canvas.height/2 + 50);
+    
+    ctx.shadowBlur = 0; // Reset glow
+}
 }
 
 function drawBubble(x, y, col) {

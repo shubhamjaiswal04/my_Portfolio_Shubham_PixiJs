@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shubham Jaiswal | Senior Game Developer</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.x/dist/pixi.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -20,29 +19,13 @@
         <header>
             <div class="hero-text">
                 <h1 class="hero-name">Shubham Jaiswal</h1>
-                <!-- <div class="hero-subtitle">
-                    Senior Software Engineer | <span class="highlight">PixiJS v8 Specialist</span><br>
-                    Building High-Performance Slot & Casino Games.
-                </div> -->
+                <
                 <div class="hero-subtitle">
                     <span id="typing-text" class="highlight"></span>
                     <span style="color: var(--neon-blue); font-size: 1.2rem; margin-left: 10px;">
                         📍 Noida, India
                     </span> <br>
-                    <!-- <div class="specialization-container">
-                        <span class="spec-tag">🎰 Slot Games</span>
-                        <span class="spec-tag">💎 Progressive Jackpots</span>
-                        <span class="spec-tag">⚙️ RNG Integration</span>
-                        <span class="spec-tag">💻 .NET Management</span>
-                    </div> -->
                 </div>
-
-                <!-- <div class="hero-subtitle">
-                    <span id="typing-text" class="highlight"></span>
-                    <div class="jackpot-ticker">
-                        🔥 <span id="jackpot-amt">GRAND JACKPOT: $125,450.75</span>
-                    </div>
-                </div> -->
 
                 <div class="about-brief">
                     <p>Senior Software Engineer with 4 years of experience in the gaming industry specializing in
@@ -375,46 +358,26 @@
                     
                     <div class="game-wrapper">
                         <canvas id="gameCanvas" width="400" height="600"></canvas>
-                        <div class="ui-panel">
-                            <h3 style="margin:0">SCORE</h3>
-                            <div class="score-val" id="score">0</div>
+                      <div class="ui-panel">
+   
 
-                            <div
-                                style="margin-top:10px; font-size: 0.9rem; color: var(--slot-green); font-weight: bold;">
-                                BEST: <span id="high-score">0</span>
-                            </div>
+    <h3 style="margin-top:15px">SCORE</h3>
+    <div class="score-val" id="score">0</div>
 
-                            <div style="margin-top:20px">NEXT</div>
-                            <div id="next-bubble-preview"></div>
-                            <button class="game-btn" onclick="resetGame()">RESTART</button>
-                        </div>
+    <div style="margin-top:10px; font-size: 0.9rem; color: var(--slot-blue); font-weight: bold;">
+        BEST: <span id="high-score">0</span>
+    </div>
+
+    <div style="margin-top:20px">NEXT</div>
+    <div id="next-bubble-preview"></div>
+    <button class="game-btn" onclick="resetGame()">RESTART</button>
+</div>
                     </div>
                 </div>
 
 
             </div>
-            <div id="bubbleModal" class="modal">
-                <div class="modal-content" style="max-width: 650px;">
-                    <div class="modal-header">
-                        <h2 style="color:var(--neon-blue)">Bubble Master</h2><span class="close-btn"
-                            onclick="closeGame()">&times;</span>
-                    </div>
-                    <div class="game-modal-body">
-                        <canvas id="gameCanvas" width="400" height="500"></canvas>
-                        <div class="game-sidebar">
-                            <div class="score-box">
-                                <div>SCORE</div>
-                                <div class="score-val" id="score">0</div>
-                            </div>
-                            <div>NEXT</div>
-                            <div id="next-bubble-preview"></div>
-                            <button class="restart-btn" onclick="openGame()">Restart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
+    
             <div class="card" onclick="playSpin(this)">
                 <div class="card-img"><img src="./src/assets/Lobby.png" loading="lazy"></div>
                 <div class="card-content">
