@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./rtp_achieventstyle.css">
 </head>
 
 <body>
@@ -36,6 +36,14 @@
                         <span class="spec-tag">💻 .NET Management</span>
                     </div> -->
                 </div>
+
+                <!-- <div class="hero-subtitle">
+                    <span id="typing-text" class="highlight"></span>
+                    <div class="jackpot-ticker">
+                        🔥 <span id="jackpot-amt">GRAND JACKPOT: $125,450.75</span>
+                    </div>
+                </div> -->
+
                 <div class="about-brief">
                     <p>Senior Software Engineer with 4 years of experience in the gaming industry specializing in
                         high-performance 2D games and logic-driven gameplay.I have successfully developed 20+ Slot Games
@@ -50,22 +58,32 @@
 
                         .</p>
                 </div>
+
                 <div class="btn-group">
                     <a href="#projects" class="btn cta-btn">View Games</a>
                     <button onclick="openSkills()" class="btn skills-btn">Show Skills 🛠️</button>
                     <button onclick="openExperience()" class="btn exp-btn">Experience 💼</button>
                     <button onclick="openContact()" class="btn skills-btn">Contact Me ✉️</button>
                     <button onclick="openEducation()" class="btn resume-btn">Education 🎓</button>
-                    <a href="./src/Resume/Shubham_Jaiswal_PixiJs_Resume.pdf" download class="btn resume-btn">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                        </svg>
-                        Download Resume
-                    </a>
+                    <button onclick="openRTP()" class="btn resume-btn"
+                        style="border-color: var(--neon-purple); color: var(--neon-purple);">
+                        Math Engine ⚙️
+                    </button>
+                    <button onclick="handleDownload(this)" class="btn resume-btn" id="resume-download-btn">
+                        <span class="btn-text">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            Download Resume
+                        </span>
+                        <span class="btn-loader" style="display: none;">Processing...</span>
+                    </button>
+                   
                 </div>
+
                 <div id="educationModal" class="modal">
                     <div class="modal-content" style="max-width: 600px;">
                         <div class="modal-header">
@@ -81,7 +99,6 @@
                                 </div>
                                 <div class="company-name">Indira Gandhi National Open University, Maidan Garhi, New
                                     Delhi,110068.</div>
-                                <!-- <p style="color: #bbb; margin-top: 5px;">University Department / Affiliated College Name Yahan Dalein</p> -->
                             </div>
 
                             <div class="edu-item">
@@ -112,19 +129,16 @@
                                 <p style="color: #bbb; margin-top: 5px;">Foundational Science and Mathematics.</p>
                             </div>
                         </div>
-                        <!-- <div class="modal-body education-body">
-                            <div class="edu-item">
-                                <div class="exp-header">
-                                    <h3 class="highlight">Bachelor of Computer Applications (BCA)</h3>
-                                    <span class="duration">2018 - 2021</span>
-                                </div>
-                                <div class="company-name">Mahatma Gandhi Kashi Vidyapith (MGKVP)</div>
-                                <p style="color: #bbb; margin-top: 5px;">Focused on Software Engineering, Data
-                                    Structures, and Web Technologies.</p>
-                            </div>
-                        </div> -->
+
                     </div>
                 </div>
+
+
+
+
+
+
+
                 <div id="experienceModal" class="modal">
                     <div class="modal-content" style="max-width: 800px;">
                         <div class="modal-header">
@@ -138,17 +152,7 @@
                                     <span class="duration">August 2024 - Present</span>
                                 </div>
                                 <div class="company-name">Chetu Inc, Noida</div>
-                                <!-- <div class="tech-stack-mini">
-                                    <div class="bar-label">PixiJS Optimization <span>95%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 95%;"></div>
-                                    </div>
-
-                                    <div class="bar-label">Game Logic (JS/C#) <span>90%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 90%;"></div>
-                                    </div>
-                                </div> -->
+                               
                                 <ul class="exp-roles">
                                     <li>Developed Interactive 2D game and create game Lobby in Pixi JS for Hosting Games
                                         and Integrated Routing. </li>
@@ -192,17 +196,7 @@
                                     <span class="duration">Feb 2022 -July 2024 </span>
                                 </div>
                                 <div class="company-name">Chetu Inc</div>
-                                <!-- <div class="tech-stack-mini">
-                                    <div class="bar-label">PixiJS Optimization <span>95%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 95%;"></div>
-                                    </div>
-
-                                    <div class="bar-label">Game Logic (JS/C#) <span>90%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 90%;"></div>
-                                    </div>
-                                </div> -->
+                               
                                 <ul class="exp-roles">
                                     <li>Developed a robust Math Engine for 10 Sweepstake games, handling complex
                                         probability calculations and payout structures.</li>
@@ -263,6 +257,7 @@
                                     <li>Developed operational tools within the POS system such as Shift Reports, and
                                         functionalities to add or edit store configurations seamlessly.</li>
                                 </ul>
+
                             </div>
 
                             <div class="exp-item">
@@ -271,17 +266,7 @@
                                     <span class="duration">Dec 2021 - Jan 2022</span>
                                 </div>
                                 <div class="company-name">Chetu Inc, Noida</div>
-                                <!-- <div class="tech-stack-mini">
-                                    <div class="bar-label">PixiJS Optimization <span>95%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 95%;"></div>
-                                    </div>
-
-                                    <div class="bar-label">Game Logic (JS/C#) <span>90%</span></div>
-                                    <div class="progress-bg">
-                                        <div class="progress-fill" style="width: 90%;"></div>
-                                    </div>
-                                </div> -->
+                              
                                 <ul class="exp-roles">
                                     <li>Gained foundational expertise in C#, .NET Core, and SQL Server, focusing on
                                         building scalable backend logic and efficient database schemas.</li>
@@ -328,24 +313,23 @@
                             <span class="skill-tag">.Net core</span>
                             <span class="skill-tag">MS-SQL Server</span><span class="skill-tag">HTML5 Canvas</span>
                             <span class="skill-tag">REST API Integration</span><span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform
-                                development</span>
-                            <span class="skill-tag">Game performance optimization</span><span
-                                class="skill-tag">Multitasking</span>
+                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform development</span>
+                            <span class="skill-tag">Game performance optimization</span><span class="skill-tag">Multitasking</span>
                             <span class="skill-tag">Problem Solving</span><span class="skill-tag">Communication</span>
                             <span class="skill-tag">Team collaboration</span><span class="skill-tag">WebGL</span>
                             <span class="skill-tag">C#</span><span class="skill-tag">Slot Logic</span>
                             <span class="skill-tag">TFS</span><span class="skill-tag">Git</span>
                             <span class="skill-tag">SVN</span><span class="skill-tag">VS Code</span>
-                            <span class="skill-tag">Visual Studio</span><span class="skill-tag">VS Code</span>
+                            <span class="skill-tag">Visual Studio</span><span class="skill-tag">Spine</span>
 
+                        </div>
+
+                        <div class="modal-body">
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- <button onclick="openSlotGame()" class="btn cta-btn">Play Slot Demo 🎰</button> -->
 
         <div id="slotModal" class="modal">
             <div class="modal-content" style="max-width: 900px; background: #000;">
@@ -381,22 +365,25 @@
             <div id="gameModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2 style="color:var(--accent)">Bubble Master Live Demo</h2>
+                        <h2 style="color:var(--accent)">Bubble Master Demo</h2>
                         <div style="display: flex; gap: 15px; align-items: center;">
                             <button id="muteBtn" onclick="toggleMute()" class="game-btn"
                                 style="background: #555; padding: 5px 10px;">🔊 Mute</button>
                             <span class="close-btn" onclick="closeGame()">&times;</span>
                         </div>
                     </div>
-                    <!-- <div class="modal-header">
-                <h2 style="color:var(--accent)">Bubble Master Live Demo</h2>
-                <span class="close-btn" onclick="closeGame()">&times;</span>
-                  </div> -->
+                    
                     <div class="game-wrapper">
                         <canvas id="gameCanvas" width="400" height="600"></canvas>
                         <div class="ui-panel">
                             <h3 style="margin:0">SCORE</h3>
                             <div class="score-val" id="score">0</div>
+
+                            <div
+                                style="margin-top:10px; font-size: 0.9rem; color: var(--slot-green); font-weight: bold;">
+                                BEST: <span id="high-score">0</span>
+                            </div>
+
                             <div style="margin-top:20px">NEXT</div>
                             <div id="next-bubble-preview"></div>
                             <button class="game-btn" onclick="resetGame()">RESTART</button>
@@ -426,6 +413,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="card" onclick="playSpin(this)">
                 <div class="card-img"><img src="./src/assets/Lobby.png" loading="lazy"></div>
                 <div class="card-content">
@@ -545,18 +534,36 @@
             <div class="card-img"><img src="./src/assets/prosperity.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Golden Prosperity</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
             <div class="card-img"><img src="./src/assets/Lucky Duck.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Lucky Duck</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 1x5 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
             <div class="card-img"><img src="./src/assets/bigBonus.png" loading="lazy"></div>
             <div class="card-content">
-                <h3>Big Bonus</h3>
+                <h3>Lucky Fortune Big Bonus</h3>
+                <div class="feature-badges">
+                    <span class="f-badge">🎰 5x3 Reel</span>
+                    <span class="f-badge">🎁 Free Spins</span>
+                    <span class="f-badge">💰 Multipliers</span>
+                </div>
+                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
             </div>
         </div>
         <div class="card">
@@ -614,11 +621,29 @@
             </div>
         </div>
     </div>
+
+
+
+
 </div>
 
 <div class="view-all-container"><button id="toggleBtn" class="view-all-btn" onclick="toggleGames()">View All Games
         ▼</button></div>
 </div>
+
+
+
+<div id="achievement-toast" class="toast">
+    <div class="toast-icon">🏆</div>
+    <div class="toast-text">
+        <b id="toast-title">Achievement Unlocked!</b>
+        <p id="toast-msg" style="margin:0; font-size: 0.8rem; color: #ccc;"></p>
+    </div>
+</div>
+
+
+
+
 
 <footer class="footer-main">
     <div class="footer-grid">
@@ -631,7 +656,7 @@
             <h3>Quick Links</h3>
             <ul class="footer-links">
                 <li><a href="#">Back to Top</a></li>
-                <li><a href="https://chancesgames.com/">My Games</a></li>
+                <li><a href="https://chancesgames.com/">Contact </a></li>
                 <li><a onclick="openSkills()">Expertise</a></li>
                 <li><a href="./src/Resume/Shubham_Jaiswal_PixiJs_Resume.pdf" download>Resume</a></li>
             </ul>
@@ -747,7 +772,44 @@
     </svg>
 </a>
 
+<div id="rtpModal" class="modal" style="display: none;">
+    <div class="modal-content"
+        style="max-width: 500px; background: #111; border: 1px solid var(--slot-gold); position: relative;">
+        <div class="modal-header">
+            <h2>Math Engine Simulator ⚙️</h2>
+            <span class="close-btn" onclick="closeRTP()">&times;</span>
+        </div>
+        <div class="modal-body" style="display: block; padding: 25px;">
+            <p style="color: #bbb; font-size: 0.9rem; margin-bottom: 20px;">
+                Input game stats to calculate theoretical **Return to Player (RTP)**.
+                This simulates the math logic used in 10+ sweepstake games.
+            </p>
 
+            <div class="input-group">
+                <label style="color: var(--neon-blue);">Total Credits Bet</label>
+                <input type="number" id="totalBet" value="100" class="form-input"
+                    style="width: 100%; box-sizing: border-box;">
+            </div>
+            <div class="input-group" style="margin-top: 15px;">
+                <label style="color: var(--neon-blue);">Total Credits Won</label>
+                <input type="number" id="totalWin" value="96" class="form-input"
+                    style="width: 100%; box-sizing: border-box;">
+            </div>
+
+            <button onclick="calculateRTP()" class="btn cta-btn" style="width: 100%; margin-top: 20px;">Calculate
+                Metrics</button>
+
+            <div id="rtpResult"
+                style="margin-top: 25px; text-align: center; display: none; padding: 15px; background: rgba(0,0,0,0.5); border-radius: 10px;">
+                <h3 style="margin-bottom: 5px; color: #fff;">Simulated RTP</h3>
+                <div id="rtpDisplay"
+                    style="font-size: 3.5rem; font-weight: bold; color: var(--neon-blue); text-shadow: 0 0 15px var(--neon-blue);">
+                    0%</div>
+                <p id="rtpStatus" style="font-size: 0.9rem; margin-top: 10px; font-weight: bold;"></p>
+            </div>
+        </div>
+    </div>
+</div>
 <!--     called my JavaScript files -->
 <script src="./main.js"></script>
 <script src="./education.js"></script>

@@ -233,7 +233,8 @@ header {
 .modal {
     display: none;
     position: fixed;
-    z-index: 2000;
+    /* z-index: 2000; */
+    z-index: 10000 !important;
     left: 0;
     top: 0;
     width: 100%;
@@ -747,47 +748,6 @@ header {
 .social-btn.yt-btn:hover svg { fill: #ff0000; }
 
 
-        /* Email Floating Button Style 
-.float-email {
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 100px; /* Isse WhatsApp ke upar rakhne ke liye distance badhaya hai 
-    right: 30px;
-    background-color: #ea4335; /* Gmail Red Color */
-    /* color: #FFF;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px #999;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.float-email:hover {
-    transform: scale(1.1);
-    background-color: #c5221f;
-} */
-
-/* Optional: Email pulse animation (Green ki jagah Red) */
-/* .float-email {
-    animation: pulse-red 2s infinite;
-}
-
-@keyframes pulse-red {
-    0% { box-shadow: 0 0 0 0 rgba(234, 67, 53, 0.7); }
-    70% { box-shadow: 0 0 0 15px rgba(234, 67, 53, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(234, 67, 53, 0); }
-} */
-
-
-
-
-
-
 
 
 
@@ -865,26 +825,6 @@ header {
 
 
 
-
-.tech-stack-mini { margin-top: 15px; }
-.bar-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--neon-blue); margin-bottom: 4px; }
-.progress-bg { background: rgba(255,255,255,0.1); height: 6px; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-.progress-fill { 
-    background: linear-gradient(to right, var(--neon-purple), var(--neon-blue)); 
-    height: 100%; 
-    box-shadow: 0 0 10px var(--neon-blue);
-    transition: width 1.5s ease-in-out;
-}
-
-/* Mobile par custom cursor hide karein */
-@media (max-width: 900px) {
-    body { cursor: auto !important; }
-    #custom-cursor { display: none !important; }
-    
-    /* Mobile par progress bars ko thoda bada karein taaki readablity achi ho */
-    .progress-bg { height: 10px; }
-    .exp-header { flex-direction: column; align-items: flex-start; }
-}
 
 
 .input-group {
@@ -1108,3 +1048,5 @@ textarea.form-input {
         margin-top: 10px;
     }
 }
+
+

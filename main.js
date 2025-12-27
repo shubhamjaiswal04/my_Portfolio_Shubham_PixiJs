@@ -134,6 +134,11 @@ let grid = [], fallingBubbles = [], particles = [], bullet = null;
 let currentBubbleColor, nextBubbleColor, score = 0, angle = -Math.PI / 2, isGameOver = false;
 //init function 
 function init() {
+    // High Score load karein page refresh par
+    const savedHighScore = localStorage.getItem('bubbleHighScore') || 0;
+    const hsElement = document.getElementById('high-score');
+    if(hsElement) hsElement.innerText = savedHighScore;
+
     grid = []; fallingBubbles = []; particles = []; score = 0; isGameOver = false;
     scoreEl.innerText = '0';
     for (let r = 0; r < ROWS; r++) {
@@ -201,8 +206,15 @@ function snapToGrid(b) {
         if (matches.length >= 3) {
             matches.forEach(m => { grid[m.r][m.c].active = false; score += 10; });
             dropFloaters();
-        } else if (closest.r >= 12) isGameOver = true;
-        scoreEl.innerText = score; return true;
+            if(typeof sounds !== 'undefined') sounds.pop.play(); // Bubble pop sound
+        } else if (closest.r >= 12) {
+            // --- GAME OVER YAHAN TRIGGER HOGA ---
+            isGameOver = true;
+            updateHighScore(score); // Naya High Score save karne ke liye
+            if(typeof sounds !== 'undefined') sounds.gameOver.play(); // Game over sound
+        }
+        scoreEl.innerText = score; 
+        return true;
     }
     return false;
 }
@@ -272,7 +284,13 @@ function draw() {
     fallingBubbles.forEach(b => drawBubble(b.x, b.y, b.color));
     if (bullet) drawBubble(bullet.x, bullet.y, bullet.color);
     if (!isGameOver) drawBubble(canvas.width / 2, canvas.height - 30, currentBubbleColor);
-    if (isGameOver) { ctx.fillStyle = 'rgba(0,0,0,0.7)'; ctx.fillRect(0, 0, 400, 600); ctx.fillStyle = 'white'; ctx.font = '40px Arial'; ctx.fillText('GAME OVER', 80, 300); }
+    if (isGameOver) {
+         ctx.fillStyle = 'rgba(0,0,0,0.7)'; 
+         ctx.fillRect(0, 0, 400, 600); 
+         ctx.fillStyle = 'white'; 
+         ctx.font = '40px Arial'; 
+         ctx.fillText('GAME OVER', 80, 300); 
+        }
 }
 
 function drawBubble(x, y, col) {
@@ -385,3 +403,134 @@ document.onkeydown = function(e) {
     if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
     if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U (View Source)
 };
+
+
+function openRTP() {
+    document.getElementById("rtpModal").style.display = "block";
+    // Achievement trigger karein
+    if(typeof showAchievement === 'function') {
+        showAchievement("The Mathematician", "Exploring the core Math Engine logic.");
+    }
+}
+
+function closeRTP() {
+    document.getElementById("rtpModal").style.display = "none";
+}
+
+function calculateRTP() {
+    const bet = parseFloat(document.getElementById("totalBet").value);
+    const win = parseFloat(document.getElementById("totalWin").value);
+    const display = document.getElementById("rtpDisplay");
+    const resultDiv = document.getElementById("rtpResult");
+    const status = document.getElementById("rtpStatus");
+
+    if (bet > 0) {
+        const rtp = ((win / bet) * 100).toFixed(2);
+        resultDiv.style.display = "block";
+        display.innerText = rtp + "%";
+        
+        // Logic for industry standards
+        if (rtp >= 92 && rtp <= 98) {
+            status.innerText = "✅ GLI COMPLIANT: Standard Market RTP";
+            status.style.color = "#25d366";
+        } else if (rtp > 98) {
+            status.innerText = "🔥 HIGH PAYOUT: Player Advantage Mode";
+            status.style.color = "#4facfe";
+        } else {
+            status.innerText = "⚠️ HIGH VOLATILITY: Operator Advantage Mode";
+            status.style.color = "#ff4757";
+        }
+        
+        // GSAP Animation for impact
+        gsap.from(display, { scale: 0.5, opacity: 0, duration: 0.5, ease: "back.out(1.7)" });
+    } else {
+        alert("Please enter a valid Bet amount.");
+    }
+}
+
+// --- ACHIEVEMENT SYSTEM ---
+function showAchievement(title, msg) {
+    const toast = document.getElementById('achievement-toast');
+    document.getElementById('toast-title').innerText = title;
+    document.getElementById('toast-msg').innerText = msg;
+    
+    toast.classList.add('show');
+    // Sound play logic if available
+    if(typeof sounds !== 'undefined' && sounds.win) sounds.win.play();
+    
+    setTimeout(() => toast.classList.remove('show'), 4000);
+}
+
+// Trigger achievements on button clicks
+document.querySelector('.exp-btn').addEventListener('click', () => {
+    showAchievement("The Professional", "Unlocked: 4+ Years of Industry Journey.");
+});
+
+document.querySelector('.skills-btn').addEventListener('click', () => {
+    showAchievement("Tech Master", "Unlocked: Full-Stack Tech Stack revealed.");
+});
+
+
+// Live Jackpot Ticker Logic
+let jackpotVal = 12450.75;
+setInterval(() => {
+    jackpotVal += Math.random() * 0.85;
+    const ticker = document.getElementById('jackpot-amt');
+    if(ticker) ticker.innerText = "GRAND JACKPOT: $" + jackpotVal.toLocaleString(undefined, {minimumFractionDigits: 2});
+}, 150);
+
+
+function handleDownload(btn) {
+    const btnText = btn.querySelector('.btn-text');
+    const btnLoader = btn.querySelector('.btn-loader');
+    const resumePath = "./src/Resume/Shubham_Jaiswal_PixiJs_Resume.pdf"; // Aapka path
+
+    // Step 1: Show Loading
+    btnText.style.display = 'none';
+    btnLoader.style.display = 'flex';
+    btn.style.pointerEvents = 'none'; // Double click rokein
+
+    // Step 2: Simulate processing then open in new tab
+    setTimeout(() => {
+        // Achievement unlock trigger karein
+        if(typeof showAchievement === 'function') {
+            showAchievement("The Candidate", "Resume processing complete. Good luck!");
+        }
+
+        // Open resume in new tab
+        window.open(resumePath, '_blank');
+
+        // Step 3: Reset Button
+        btnText.style.display = 'flex';
+        btnLoader.style.display = 'none';
+        btn.style.pointerEvents = 'auto';
+    }, 1200); // 1.2 second ka delay professional lagta hai
+}
+
+
+// 1. Page load hote hi purana High Score check karein
+document.addEventListener('DOMContentLoaded', () => {
+    const savedHighScore = localStorage.getItem('bubbleHighScore') || 0;
+    const highScoreElement = document.getElementById('high-score');
+    if(highScoreElement) highScoreElement.innerText = savedHighScore;
+});
+
+// 2. Score update karne wala function (Ise apne game logic mein call karein)
+function updateHighScore(currentScore) {
+    const savedHighScore = parseInt(localStorage.getItem('bubbleHighScore') || 0);
+    
+    if (currentScore > savedHighScore) {
+        localStorage.setItem('bubbleHighScore', currentScore);
+        const highScoreElement = document.getElementById('high-score');
+        if(highScoreElement) {
+            highScoreElement.innerText = currentScore;
+            // GSAP effect for new high score
+            gsap.from(highScoreElement, { scale: 1.5, color: "#00f2fe", duration: 0.5 });
+        }
+        
+        // Achievement trigger karein
+        if(typeof showAchievement === 'function') {
+            showAchievement("New Record! 🎯", `Aapne ${currentScore} ka naya high score banaya!`);
+        }
+    }
+}
