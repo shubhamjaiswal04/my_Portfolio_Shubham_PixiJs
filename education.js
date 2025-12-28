@@ -1,20 +1,11 @@
+// education.js
 function openEducation() {
-    if(typeof sounds !== 'undefined') sounds.click.play();
-    document.getElementById("educationModal").style.display = "block";
+    if(typeof sounds !== 'undefined') sounds.click.play(); //
+    document.getElementById("educationModal").style.display = "block"; //
+    showAchievement("The Scholar 🎓", "Academic background accessed.");
 }
 
 function closeEducation() {
-    document.getElementById("educationModal").style.display = "none";
-}
-
-// Global click handler update
-window.onclick = function (e) { 
-    if (e.target.className === 'modal') { 
-        closeSkills(); 
-        closeGame();
-        closeExperience();
-        closeContact();
-        closeSuccess();
-        closeEducation(); // Naya add kiya
-    } 
+    if(typeof sounds !== 'undefined') sounds.click.play();
+    document.getElementById("educationModal").style.display = "none"; //
 }

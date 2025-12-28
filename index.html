@@ -19,7 +19,7 @@
         <header>
             <div class="hero-text">
                 <h1 class="hero-name">Shubham Jaiswal</h1>
-                <
+
                 <div class="hero-subtitle">
                     <span id="typing-text" class="highlight"></span>
                     <span style="color: var(--neon-blue); font-size: 1.2rem; margin-left: 10px;">
@@ -27,7 +27,7 @@
                     </span> <br>
                 </div>
 
-                <div class="about-brief">
+                <!-- <div class="about-brief">
                     <p>Senior Software Engineer with 4 years of experience in the gaming industry specializing in
                         high-performance 2D games and logic-driven gameplay.I have successfully developed 20+ Slot Games
                         using PixiJS, Proven ability to handle multiple
@@ -38,10 +38,30 @@
                         A proactive learner motivated to grow within the Game Development industry, I bring excellent
                         teamwork skills, flexibility, and the ability to work effectively both independently and in
                         collaborative team settings to achieve project goals.
-
-                        .</p>
+                    </p>
+                </div> -->
+                <div class="about-brief">
+                    <p>
+                        <b style="color: var(--neon-blue);">Senior Software Engineer</b> with over <span
+                            class="highlight">4 years of expertise</span> in the gaming industry, specializing in
+                        high-performance 2D engine architecture and complex logic-driven gameplay.
+                        I have successfully architected and deployed <span class="highlight">20+ professional Slot
+                            Games</span> using <b style="color: var(--neon-purple);">PixiJS</b>, ranging from classic
+                        reels to advanced multi-feature titles.
+                    </p>
+                    <!-- <p>
+                        My core strength lies in bridging the gap between <b
+                            style="color: var(--slot-gold);">Mathematical Precision</b> and <b
+                            style="color: var(--neon-blue);">Visual Excellence</b>.
+                        I specialize in developing robust <span class="highlight">Math Engines, RNG systems, and RTP
+                            simulators</span> that meet strict industry certification standards (GLI).
+                    </p> -->
+                    <p>
+                        A proactive problem-solver and collaborative team player, I excel in fast-paced environments,
+                        ensuring seamless <b style="color: var(--neon-purple);">API integrations</b> and cross-platform
+                        performance optimization for both desktop and mobile users.
+                    </p>
                 </div>
-
                 <div class="btn-group">
                     <a href="#projects" class="btn cta-btn">View Games</a>
                     <button onclick="openSkills()" class="btn skills-btn">Show Skills 🛠️</button>
@@ -64,7 +84,7 @@
                         </span>
                         <span class="btn-loader" style="display: none;">Processing...</span>
                     </button>
-                   
+
                 </div>
 
                 <div id="educationModal" class="modal">
@@ -131,11 +151,12 @@
                         <div class="modal-body exp-body">
                             <div class="exp-item">
                                 <div class="exp-header">
+
                                     <h3 class="highlight">Senior Software Engineer</h3>
+                                    <div class="company-name">Chetu Inc, Noida</div>
                                     <span class="duration">August 2024 - Present</span>
                                 </div>
-                                <div class="company-name">Chetu Inc, Noida</div>
-                               
+
                                 <ul class="exp-roles">
                                     <li>Developed Interactive 2D game and create game Lobby in Pixi JS for Hosting Games
                                         and Integrated Routing. </li>
@@ -179,7 +200,7 @@
                                     <span class="duration">Feb 2022 -July 2024 </span>
                                 </div>
                                 <div class="company-name">Chetu Inc</div>
-                               
+
                                 <ul class="exp-roles">
                                     <li>Developed a robust Math Engine for 10 Sweepstake games, handling complex
                                         probability calculations and payout structures.</li>
@@ -249,7 +270,7 @@
                                     <span class="duration">Dec 2021 - Jan 2022</span>
                                 </div>
                                 <div class="company-name">Chetu Inc, Noida</div>
-                              
+
                                 <ul class="exp-roles">
                                     <li>Gained foundational expertise in C#, .NET Core, and SQL Server, focusing on
                                         building scalable backend logic and efficient database schemas.</li>
@@ -296,8 +317,10 @@
                             <span class="skill-tag">.Net core</span>
                             <span class="skill-tag">MS-SQL Server</span><span class="skill-tag">HTML5 Canvas</span>
                             <span class="skill-tag">REST API Integration</span><span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform development</span>
-                            <span class="skill-tag">Game performance optimization</span><span class="skill-tag">Multitasking</span>
+                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform
+                                development</span>
+                            <span class="skill-tag">Game performance optimization</span><span
+                                class="skill-tag">Multitasking</span>
                             <span class="skill-tag">Problem Solving</span><span class="skill-tag">Communication</span>
                             <span class="skill-tag">Team collaboration</span><span class="skill-tag">WebGL</span>
                             <span class="skill-tag">C#</span><span class="skill-tag">Slot Logic</span>
@@ -314,7 +337,7 @@
             </div>
         </div>
 
-        <div id="slotModal" class="modal">
+        <!-- <div id="slotModal" class="modal">
             <div class="modal-content" style="max-width: 900px; background: #000;">
                 <div class="modal-header">
                     <h2>PixiJS v8 Slot Engine</h2>
@@ -326,7 +349,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <h2 class="section-title" id="projects">Featured Portfolio for Games</h2>
         <div class="grid">
@@ -355,29 +378,31 @@
                             <span class="close-btn" onclick="closeGame()">&times;</span>
                         </div>
                     </div>
-                    
+
                     <div class="game-wrapper">
                         <canvas id="gameCanvas" width="400" height="600"></canvas>
-                      <div class="ui-panel">
-   
+                        <div class="ui-panel">
 
-    <h3 style="margin-top:15px">SCORE</h3>
-    <div class="score-val" id="score">0</div>
 
-    <div style="margin-top:10px; font-size: 0.9rem; color: var(--slot-blue); font-weight: bold;">
-        BEST: <span id="high-score">0</span>
-    </div>
+                            <h3 style="margin-top:15px">SCORE</h3>
+                            <div class="score-val" id="score">0</div>
+                            <div style="color: var(--neon-purple); font-weight: bold;">LEVEL: <span
+                                    id="current-level">1</span></div>
+                            <div
+                                style="margin-top:10px; font-size: 0.9rem; color: var(--slot-blue); font-weight: bold;">
+                                BEST: <span id="high-score">0</span>
+                            </div>
 
-    <div style="margin-top:20px">NEXT</div>
-    <div id="next-bubble-preview"></div>
-    <button class="game-btn" onclick="resetGame()">RESTART</button>
-</div>
+                            <div style="margin-top:20px">NEXT</div>
+                            <div id="next-bubble-preview"></div>
+                            <button class="game-btn" onclick="resetGame()">RESTART</button>
+                        </div>
                     </div>
                 </div>
 
 
             </div>
-    
+
             <div class="card" onclick="playSpin(this)">
                 <div class="card-img"><img src="./src/assets/Lobby.png" loading="lazy"></div>
                 <div class="card-content">
@@ -433,154 +458,163 @@
 
 <div id="hidden-games" style="display: none;">
     <div class="grid" style="margin-top: 30px;">
+
         <div class="card">
             <div class="card-img"><img src="./src/assets/supremeTreasure.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Supreme Treasure</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
+                <p>Oriental themed game with Stacked Symbols and Free Spin retriggers.</p>
+                <div class="tags-container"><span class="tag gold">Free Spins</span><span class="tag">Symbol
+                        Stacking</span></div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Luckypanda.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Lucky Panda</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/cracker (2).png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Cracker</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Luxury.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Life of Luxury</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Utah.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Utah Fortune</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/prosperity.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Golden Prosperity</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Lucky Duck.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Lucky Duck</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 1x5 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/bigBonus.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Lucky Fortune Big Bonus</h3>
-                <div class="feature-badges">
-                    <span class="f-badge">🎰 5x3 Reel</span>
-                    <span class="f-badge">🎁 Free Spins</span>
-                    <span class="f-badge">💰 Multipliers</span>
-                </div>
-                <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Talishman.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Talishman</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/PurpleNation.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Purple Nation</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/HilsideManor.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Hillside Manor</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Screenshot 2025-12-17 214247.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Bahma Rock</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/PandaQuest.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Panda Quest</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/Lucky Ducky.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Lucky Ducky</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/fortune.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Lucky Fortune</h3>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-img"><img src="./src/assets/fortuneshamrock.png" loading="lazy"></div>
-            <div class="card-content">
-                <h3>Fortune Shamrock</h3>
-            </div>
-        </div>
+
         <div class="card">
             <div class="card-img"><img src="./src/assets/Yucatanquest.png" loading="lazy"></div>
             <div class="card-content">
                 <h3>Yucatan Quest</h3>
+                <p>Features cascading "Blasting Reels" mechanics where winning symbols explode.</p>
+                <div class="tags-container"><span class="tag gold">Blasting Reels</span><span class="tag">Physics</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Utah.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Utah Fortune</h3>
+                <p>Western-style slot focusing on high-payline math and expanding wild features.</p>
+                <div class="tags-container"><span class="tag gold">Payline Logic</span><span class="tag">Expanding
+                        Wilds</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Luckypanda.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Lucky Panda</h3>
+                <p>A 243-ways to win engine with rich cultural aesthetics and smooth animations.</p>
+                <div class="tags-container"><span class="tag gold">243 Ways Engine</span><span
+                        class="tag">JavaScript</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/PurpleNation.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Purple Nation</h3>
+                <p>Modern neon-themed game utilizing custom shader effects for symbol glows.</p>
+                <div class="tags-container"><span class="tag gold">Shaders</span><span class="tag">Neon UI</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/HilsideManor.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Hillside Manor</h3>
+                <p>Mystery-themed slot with interactive pick-em bonus rounds and hidden prizes.</p>
+                <div class="tags-container"><span class="tag gold">Pick-em Bonus</span><span class="tag">Logic</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Screenshot 2025-12-17 214247.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Bahama Rock</h3>
+                <p>Tropical theme with Multiplier Wilds and high-energy background music integration.</p>
+                <div class="tags-container"><span class="tag gold">Multiplier Wilds</span><span
+                        class="tag">HowlerJS</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Talishman.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Talisman</h3>
+                <p>Ancient artifact theme with Scatter-based bonus triggers and complex win-lines.</p>
+                <div class="tags-container"><span class="tag gold">Scatter Logic</span><span
+                        class="tag">Win-lines</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/PandaQuest.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Panda Quest</h3>
+                <p>High-resolution asset management and performance-optimized for low-end devices.</p>
+                <div class="tags-container"><span class="tag gold">Asset Optimization</span><span class="tag">UI</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Luxury.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Life of Luxury</h3>
+                <p>Premium 5-reel slot with luxury-themed icons and multi-level bonus structures.</p>
+                <div class="tags-container"><span class="tag gold">Multi-level Bonus</span><span
+                        class="tag">PixiJS</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/cracker (2).png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Cracker</h3>
+                <p>Festive themed slot with explosive particle effects and rewarding paytables.</p>
+                <div class="tags-container"><span class="tag gold">Particles</span><span class="tag">Paytable
+                        Math</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/prosperity.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Golden Prosperity</h3>
+                <p>Traditional luck-based slot with "Lucky Wild" re-spin mechanics and gold-foil UI.</p>
+                <div class="tags-container"><span class="tag gold">Re-spin Mechanics</span><span class="tag">Gold
+                        UI</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/Lucky Duck.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Lucky Duck</h3>
+                <p>Unique 1x5 reel structure focusing on quick play and high-frequency hits.</p>
+                <div class="tags-container"><span class="tag gold">Custom Reel Strip</span><span class="tag">Fast
+                        Logic</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/bigBonus.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Lucky Fortune Big Bonus</h3>
+                <p>Large-scale bonus triggers with interactive choice-based player engagement.</p>
+                <div class="tags-container"><span class="tag gold">Player Choice</span><span class="tag">Bonus
+                        Logic</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/fortuneshamrock.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Fortune Shamrock</h3>
+                <p>St. Patrick's themed game with "Clingy Wilds" and rainbow multiplier paths.</p>
+                <div class="tags-container"><span class="tag gold">Clingy Wilds</span><span class="tag">Multiplier
+                        Path</span></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-img"><img src="./src/assets/fortune.png" loading="lazy"></div>
+            <div class="card-content">
+                <h3>Lucky Fortune</h3>
+                <p>Classic luck-themed slot with optimized sprite-sheet animations for smooth FPS.</p>
+                <div class="tags-container"><span class="tag gold">Sprite Sheets</span><span class="tag">FPS
+                        Optimization</span></div>
             </div>
         </div>
     </div>
@@ -634,7 +668,8 @@
                             d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
                     </svg>
                 </a>
-                <a href="https://wa.me/919721288304" target="_blank" class="social-btn wa-btn">
+                <a href="https://wa.me/919721288304?text=Hi%20Shubham,%20I%20saw%20your%20portfolio%20and%20I'm%20interested%20in%20your%20Game%20Development%20services.%20Can%20we%20connect?"
+                    target="_blank" class="social-btn wa-btn">
                     <svg viewBox="0 0 24 24">
                         <path
                             d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
@@ -716,19 +751,47 @@
             </div>
         </div>
     </div>
-    <div id="successModal" class="modal">
+    <!-- <div id="successModal" class="modal">
         <div class="modal-content" style="max-width: 400px; text-align: center; padding: 30px;">
             <div style="font-size: 50px; color: var(--neon-blue); margin-bottom: 20px;">✓</div>
             <h2 style="color: var(--slot-gold);">Thank You!</h2>
             <p>Your message has been sent to Shubham's inbox. 🚀</p>
             <button onclick="closeSuccess()" class="btn cta-btn" style="margin-top: 20px;">Close</button>
         </div>
+    </div> -->
+    <div id="successModal" class="modal">
+        <div class="modal-content"
+            style="max-width: 450px; text-align: center; border: 2px solid var(--slot-gold); background: #000;">
+            <div style="padding: 40px;">
+                <div style="font-size: 60px; margin-bottom: 20px; filter: drop-shadow(0 0 15px var(--slot-gold));">🏆
+                </div>
+
+                <h2 style="color: var(--slot-gold); text-transform: uppercase; letter-spacing: 2px; font-size: 2rem;">
+                    Mission Accomplished!
+                </h2>
+
+                <p style="color: #00f2fe; font-family: 'Courier New', monospace; font-weight: bold; margin: 20px 0;">
+                    >> Message Sent Successfully_<br>
+                    >> Connectivity Established_
+                </p>
+
+                <div
+                    style="background: rgba(255, 215, 0, 0.1); padding: 10px; border-radius: 5px; color: #ccc; font-size: 0.85rem;">
+                    Shubham will get back to you shortly.
+                </div>
+
+                <button onclick="closeSuccess()" class="btn cta-btn" style="margin-top: 30px; width: 100%;">
+                    Return to Base 🚀
+                </button>
+            </div>
+        </div>
     </div>
 
     <div class="footer-bottom">&copy; 2025 Shubham Jaiswal | Built with Passion for Gaming.</div>
 </footer>
 
-<a href="https://wa.me/919721288304" class="float-wa" target="_blank">
+<a href="https://wa.me/919721288304?text=Hi%20Shubham,%20I%20saw%20your%20portfolio%20and%20I'm%20interested%20in%20your%20Game%20Development%20services.%20Can%20we%20connect?"
+    class="wa-btn" id="float-wa" target="_blank">
     <svg width="35" height="35" fill="white" viewBox="0 0 24 24">
         <path
             d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
@@ -777,6 +840,7 @@
 <script src="./main.js"></script>
 <script src="./education.js"></script>
 <script src="./contact.js"></script>
+<script src="./game.js"></script>
 
 </body>
 

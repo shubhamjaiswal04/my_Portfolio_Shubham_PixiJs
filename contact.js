@@ -1,29 +1,66 @@
 function openContact() {
-    if(typeof sounds !== 'undefined') sounds.click.play();
+    if (typeof sounds !== 'undefined') sounds.click.play();
     document.getElementById("contactModal").style.display = "block";
 }
 
 function closeContact() {
-    if(typeof sounds !== 'undefined') sounds.click.play();
+    if (typeof sounds !== 'undefined') sounds.click.play();
     document.getElementById("contactModal").style.display = "none";
 }
 
-// Existing window.onclick ko update karein
-window.onclick = function (e) { 
-    if (e.target.className === 'modal') { 
-        closeSkills(); 
-        closeGame();
-        closeExperience();
-        closeContact(); // Naya add kiya
-    } 
+// contact.js mein openSuccess ko update karein
+function openSuccess() {
+    if (typeof sounds !== 'undefined') sounds.pop.play();
+    document.getElementById("successModal").style.display = "block";
+
+    // GSAP Confetti Effect
+    for (let i = 0; i < 50; i++) {
+        createConfetti();
+    }
+
+    if (typeof showAchievement === 'function') {
+        showAchievement("The Communicator 🚀", "Successfully established a secure link!");
+    }
+}
+
+function createConfetti() {
+    const confetti = document.createElement('div');
+    confetti.className = 'confetti';
+    document.getElementById("successModal").appendChild(confetti);
+
+    const colors = ['#00f2fe', '#ffd700', '#ff0000', '#2ecc71'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    gsap.set(confetti, {
+        x: Math.random() * window.innerWidth,
+        y: -10,
+        backgroundColor: color
+    });
+
+    gsap.to(confetti, {
+        y: window.innerHeight + 10,
+        x: "+=" + (Math.random() * 200 - 100),
+        rotation: Math.random() * 360,
+        duration: Math.random() * 2 + 1,
+        ease: "power1.out",
+        onComplete: () => confetti.remove()
+    });
+}
+// function openSuccess() {
+//     if (typeof sounds !== 'undefined') sounds.pop.play();
+//     document.getElementById("successModal").style.display = "block";
+// }
+
+function closeSuccess() {
+    document.getElementById("successModal").style.display = "none";
 }
 
 // Form Submission Logic
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
-    contactForm.addEventListener('submit', async function(e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault(); // Page refresh hone se rokein
-        
+
         const formData = new FormData(this);
         const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.innerText = "Sending...";
@@ -52,22 +89,5 @@ if (contactForm) {
     });
 }
 
-function openSuccess() {
-    if(typeof sounds !== 'undefined') sounds.pop.play();
-    document.getElementById("successModal").style.display = "block";
-}
 
-function closeSuccess() {
-    document.getElementById("successModal").style.display = "none";
-}
 
-// Global click handler mein success modal bhi add karein
-window.onclick = function (e) { 
-    if (e.target.className === 'modal') { 
-        closeSkills(); 
-        closeGame();
-        closeExperience();
-        closeContact();
-        closeSuccess();
-    } 
-}

@@ -1,18 +1,15 @@
 
 (async () => {
     const app = new PIXI.Application();
-    await app.init({ 
-        canvas: document.getElementById('bg-canvas'), 
-        resizeTo: window, 
+    await app.init({
+        canvas: document.getElementById('bg-canvas'),
+        resizeTo: window,
         backgroundAlpha: 0,
         antialias: true,
         autoDensity: true, // Important for iOS/High DPI
         resolution: window.devicePixelRatio || 1
     });
-    // await app.init({ 
-    //     canvas: document.getElementById('bg-canvas'),
-    //      resizeTo: window, 
-    //      backgroundAlpha: 0});
+
     const stars = [];
     const starTexture = app.renderer.generateTexture(new PIXI.Graphics().circle(0, 0, 3).fill({ color: 0x4facfe, alpha: 0.5 }));
 
@@ -25,9 +22,9 @@
     }
 
     let mouseX = -1000, mouseY = -1000;
-    window.addEventListener('mousemove', e => { 
+    window.addEventListener('mousemove', e => {
         mouseX = e.clientX;
-        mouseY = e.clientY; 
+        mouseY = e.clientY;
     });
 // ticker for manage the stars
     app.ticker.add(() => {
@@ -97,234 +94,35 @@ function toggleMute() {
 }
 // --- UI LOGIC ---
 function openSkills() {
-     document.getElementById("skillsModal").style.display = "block"; 
-    
+     document.getElementById("skillsModal").style.display = "block";
+     showAchievement("Tech Master 🛠️", "Full-Stack Tech Stack revealed!");
+
 }
 function closeSkills() {
-     document.getElementById("skillsModal").style.display = "none"; 
+     document.getElementById("skillsModal").style.display = "none";
 }
-function openGame() { 
+function openGame() {
     sounds.click.play(); // Play click
     sounds.bg.play();    // Start BG Music
     document.getElementById("gameModal").style.display = "block";
      resetGame();
 }
-function closeGame() { 
+function closeGame() {
     sounds.click.play();
     sounds.bg.stop();
     document.getElementById("gameModal").style.display = "none";
 }
-window.onclick = function (e) { 
-    if (e.target.className === 'modal') { 
-        closeSkills(); closeGame();
-    } 
-}
 
 
 
-// --- ------------------------------------------------------BUBBLE MASTER GAME ENGINE ---
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const scoreEl = document.getElementById('score');
-const nextPreview = document.getElementById('next-bubble-preview');
-
-const COLS = 8, ROWS = 14, RADIUS = 25, DIAMETER = 50;
-const COLORS = ['#e74c3c', '#3498db', '#2ecc71', '#f1c40f', '#9b59b6'];
-let grid = [], fallingBubbles = [], particles = [], bullet = null;
-let currentBubbleColor, nextBubbleColor, score = 0, angle = -Math.PI / 2, isGameOver = false;
-//init function 
-function init() {
-    // High Score load karein page refresh par
-    const savedHighScore = localStorage.getItem('bubbleHighScore') || 0;
-    const hsElement = document.getElementById('high-score');
-    if(hsElement) hsElement.innerText = savedHighScore;
-
-    grid = []; fallingBubbles = []; particles = []; score = 0; isGameOver = false;
-    scoreEl.innerText = '0';
-    for (let r = 0; r < ROWS; r++) {
-        grid[r] = [];
-        for (let c = 0; c < COLS; c++) {
-            grid[r][c] = { active: r < 6, color: r < 6 ? getRandomColor() : null };
-        }
-    }
-    nextBubbleColor = getRandomColor();
-    loadLauncher();
-}
-
-// function for get random color for balls
-function getRandomColor() { 
-    return COLORS[Math.floor(Math.random() * COLORS.length)];
-}
-// load launcher function
-function loadLauncher() { 
-    currentBubbleColor = nextBubbleColor;
-    nextBubbleColor = getRandomColor(); 
-    nextPreview.style.backgroundColor = nextBubbleColor;
-}
-
-// get tile cordinates
-function getTileCoordinate(r, c) {
-    let x = c * DIAMETER + RADIUS + (r % 2 !== 0 ? RADIUS : 0);
-    let y = r * (DIAMETER * 0.85) + RADIUS;
-    return { x, y };
-}
-
-function getNeighbors(r, c) {
-    let ns = [], os = (r % 2 === 0) ? [[-1, -1], [-1, 0], [0, -1], [0, 1], [1, -1], [1, 0]] : [[-1, 0], [-1, 1], [0, -1], [0, 1], [1, 0], [1, 1]];
-    os.forEach(o => {
-        let nr = r + o[0], nc = c + o[1];
-        if (nr >= 0 && nr < ROWS && nc >= 0 && nc < COLS) ns.push({ r: nr, c: nc });
+document.addEventListener('DOMContentLoaded', () => {
+    gsap.to(".glow-ring", {
+        rotation: 360,
+        duration: 8, // Speed thodi fast ki hai
+        repeat: -1,
+        ease: "none"
     });
-    return ns;
-}
-
-canvas.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    angle = Math.atan2((e.clientY - rect.top) - (canvas.height - 30), (e.clientX - rect.left) - (canvas.width / 2));
-    angle = Math.max(-2.9, Math.min(-0.2, angle));
 });
-
-canvas.addEventListener('mousedown', () => {
-    if (!bullet && !isGameOver) {
-        sounds.shoot.play(); // Shooting sound
-        bullet = { x: canvas.width / 2, y: canvas.height - 30, vx: Math.cos(angle) * 15, vy: Math.sin(angle) * 15, color: currentBubbleColor };
-    }
-});
-
-function snapToGrid(b) {
-    let closest = null, minDist = Infinity;
-    for (let r = 0; r < ROWS; r++) {
-        for (let c = 0; c < COLS; c++) {
-            if (grid[r][c].active) continue;
-            let pos = getTileCoordinate(r, c), dist = Math.hypot(b.x - pos.x, b.y - pos.y);
-            if (dist < minDist) { minDist = dist; closest = { r, c }; }
-        }
-    }
-    if (closest && minDist < RADIUS * 1.6) {
-        grid[closest.r][closest.c] = { active: true, color: b.color };
-        let matches = findMatches(closest.r, closest.c, b.color);
-        if (matches.length >= 3) {
-            matches.forEach(m => { grid[m.r][m.c].active = false; score += 10; });
-            dropFloaters();
-            if(typeof sounds !== 'undefined') sounds.pop.play(); // Bubble pop sound
-        } else if (closest.r >= 12) {
-            // --- GAME OVER YAHAN TRIGGER HOGA ---
-            isGameOver = true;
-            updateHighScore(score); // Naya High Score save karne ke liye
-            if(typeof sounds !== 'undefined') sounds.gameOver.play(); // Game over sound
-        }
-        scoreEl.innerText = score; 
-        return true;
-    }
-    return false;
-}
-
-function findMatches(r, c, col) {
-    let found = [], stack = [{ r, c }], visited = new Set([`${r},${c}`]);
-    while (stack.length) {
-        let curr = stack.pop(); found.push(curr);
-        getNeighbors(curr.r, curr.c).forEach(n => {
-            if (grid[n.r][n.c].active && grid[n.r][n.c].color === col && !visited.has(`${n.r},${n.c}`)) {
-                visited.add(`${n.r},${n.c}`); stack.push(n);
-            }
-        });
-    }
-    return found;
-}
-
-function dropFloaters() {
-    let safe = new Set(), queue = [];
-    for (let c = 0; c < COLS; c++) if (grid[0][c].active) { safe.add(`0,${c}`); queue.push({ r: 0, c }); }
-    while (queue.length) {
-        let curr = queue.shift();
-        getNeighbors(curr.r, curr.c).forEach(n => {
-            if (grid[n.r][n.c].active && !safe.has(`${n.r},${n.c}`)) { safe.add(`${n.r},${n.c}`); queue.push(n); }
-        });
-    }
-    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-        if (grid[r][c].active && !safe.has(`${r},${c}`)) {
-            let p = getTileCoordinate(r, c);
-            fallingBubbles.push({ x: p.x, y: p.y, color: grid[r][c].color, vy: -2 });
-            grid[r][c].active = false; score += 20;
-        }
-    }
-}
-
-function gameLoop() {
-    if (document.getElementById('gameModal').style.display === 'block') {
-        update(); draw();
-    }
-    requestAnimationFrame(gameLoop);
-}
-
-function update() {
-    if (bullet) {
-        bullet.x += bullet.vx; bullet.y += bullet.vy;
-        if (bullet.x < RADIUS || bullet.x > canvas.width - RADIUS) bullet.vx *= -1;
-        let hit = false;
-        for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
-            if (grid[r][c].active) {
-                let p = getTileCoordinate(r, c);
-                if (Math.hypot(bullet.x - p.x, bullet.y - p.y) < DIAMETER - 5) hit = true;
-            }
-        }
-        if (hit || bullet.y < RADIUS) { snapToGrid(bullet); bullet = null; loadLauncher(); }
-    }
-    fallingBubbles.forEach((b, i) => { b.y += b.vy; b.vy += 0.5; if (b.y > canvas.height) fallingBubbles.splice(i, 1); });
-}
-
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (!bullet && !isGameOver) {
-        ctx.beginPath(); ctx.setLineDash([5, 5]); ctx.moveTo(canvas.width / 2, canvas.height - 30);
-        ctx.lineTo(canvas.width / 2 + Math.cos(angle) * 100, canvas.height - 30 + Math.sin(angle) * 100);
-        ctx.strokeStyle = '#666'; ctx.stroke(); ctx.setLineDash([]);
-    }
-    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) if (grid[r][c].active) drawBubble(getTileCoordinate(r, c).x, getTileCoordinate(r, c).y, grid[r][c].color);
-    fallingBubbles.forEach(b => drawBubble(b.x, b.y, b.color));
-    if (bullet) drawBubble(bullet.x, bullet.y, bullet.color);
-    if (!isGameOver) drawBubble(canvas.width / 2, canvas.height - 30, currentBubbleColor);
-    // if (isGameOver) {
-    //      ctx.fillStyle = 'rgba(0,0,0,0.7)'; 
-    //      ctx.fillRect(0, 0, 400, 600); 
-    //      ctx.fillStyle = 'white'; 
-    //      ctx.font = '40px Arial'; 
-    //      ctx.fillText('GAME OVER', 80, 300); 
-    //     }
-    if (isGameOver) {
-    ctx.fillStyle = 'rgba(0,0,0,0.85)'; // Screen black/blank effect
-    ctx.fillRect(0, 0, canvas.width, canvas.height); 
-    
-    ctx.textAlign = "center";
-    ctx.shadowBlur = 25; // Glow intensity
-    ctx.shadowColor = "#00f2fe"; // Neon Blue glow
-    
-    ctx.fillStyle = '#00f2fe';
-    ctx.font = 'bold 45px Arial';
-    ctx.fillText('GAME OVER', canvas.width/2, canvas.height/2 - 20); 
-
-    ctx.shadowColor = "#ffd700"; // Gold glow for score
-    ctx.fillStyle = '#ffd700';
-    ctx.font = 'bold 35px Arial';
-    ctx.fillText('YOUR SCORE: ' + score, canvas.width/2, canvas.height/2 + 50);
-    
-    ctx.shadowBlur = 0; // Reset glow
-}
-}
-
-function drawBubble(x, y, col) {
-    ctx.beginPath(); let g = ctx.createRadialGradient(x - 5, y - 5, 2, x, y, RADIUS);
-    g.addColorStop(0, '#fff'); g.addColorStop(1, col);
-    ctx.fillStyle = g; ctx.arc(x, y, RADIUS - 1, 0, Math.PI * 2); ctx.fill();
-}
-
-function resetGame() { 
-    init();
-
-}
-
-
-
 
 
 
@@ -333,6 +131,7 @@ function resetGame() {
 function openExperience() {
     if(typeof sounds !== 'undefined') sounds.click.play();
     document.getElementById("experienceModal").style.display = "block";
+    showAchievement("The Professional 💼", "4+ Years of Industry Journey Unlocked.");
 }
 
 function closeExperience() {
@@ -340,14 +139,7 @@ function closeExperience() {
     document.getElementById("experienceModal").style.display = "none";
 }
 
-// Window click logic (Pehele wale window.onclick ko update karein)
-window.onclick = function (e) { 
-    if (e.target.className === 'modal') { 
-        closeSkills(); 
-        closeGame();
-        closeExperience(); // Naya add kiya
-    } 
-}
+
 
 // Mobile detect karne ka function
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -365,32 +157,18 @@ if (!isMobile) {
         cursor.style.top = e.clientY + 'px';
     });
 }
-init();
-requestAnimationFrame(gameLoop);
 
 
 
-
-
-
-// GSAP Library CDN load kar lein index.html mein agar nahi hai toh
-// <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-// Ensure GSAP is included in index.html
-// 1. Profile Glow Rotation
-gsap.to(".glow-ring", {
-    rotation: 360,
-    duration: 10,
-    repeat: -1,
-    ease: "none"
-});
-
-// 2. Typing Effect Logic
-const roles = ["Slot Game Developer", "PixiJS Developer"];
+// main.js - Consolidated Typing Logic
+const roles = ["Slot Game Developer", "PixiJS Developer", "Senior Software Engineer"];
 let roleIndex = 0;
 let charIndex = 0;
-const target = document.getElementById("typing-text");
 
 function type() {
+    const target = document.getElementById("typing-text");
+    if (!target) return; // Guard clause agar element na mile
+
     if (charIndex < roles[roleIndex].length) {
         target.textContent += roles[roleIndex].charAt(charIndex);
         charIndex++;
@@ -401,6 +179,9 @@ function type() {
 }
 
 function erase() {
+    const target = document.getElementById("typing-text");
+    if (!target) return;
+
     if (charIndex > 0) {
         target.textContent = roles[roleIndex].substring(0, charIndex - 1);
         charIndex--;
@@ -411,8 +192,18 @@ function erase() {
     }
 }
 
-// Start animation on load
-window.addEventListener('DOMContentLoaded', type);
+// FIX: Start typing ONLY when window is fully loaded
+window.addEventListener('load', () => {
+    type();
+    
+    // Ring rotation fix - Yahan sirf ek baar rakhein
+    gsap.to(".glow-ring", {
+        rotation: 360,
+        duration: 8,
+        repeat: -1,
+        ease: "none"
+    });
+});
 
 // 3. Inspect Element Protection (Right Click & Shortcuts)
 document.addEventListener('contextmenu', event => event.preventDefault()); // Right click block
@@ -447,7 +238,7 @@ function calculateRTP() {
         const rtp = ((win / bet) * 100).toFixed(2);
         resultDiv.style.display = "block";
         display.innerText = rtp + "%";
-        
+
         // Logic for industry standards
         if (rtp >= 92 && rtp <= 98) {
             status.innerText = "✅ GLI COMPLIANT: Standard Market RTP";
@@ -459,7 +250,7 @@ function calculateRTP() {
             status.innerText = "⚠️ HIGH VOLATILITY: Operator Advantage Mode";
             status.style.color = "#ff4757";
         }
-        
+
         // GSAP Animation for impact
         gsap.from(display, { scale: 0.5, opacity: 0, duration: 0.5, ease: "back.out(1.7)" });
     } else {
@@ -472,22 +263,29 @@ function showAchievement(title, msg) {
     const toast = document.getElementById('achievement-toast');
     document.getElementById('toast-title').innerText = title;
     document.getElementById('toast-msg').innerText = msg;
-    
+
     toast.classList.add('show');
     // Sound play logic if available
     if(typeof sounds !== 'undefined' && sounds.win) sounds.win.play();
-    
+
     setTimeout(() => toast.classList.remove('show'), 4000);
 }
 
 // Trigger achievements on button clicks
-document.querySelector('.exp-btn').addEventListener('click', () => {
-    showAchievement("The Professional", "Unlocked: 4+ Years of Industry Journey.");
-});
+// document.querySelector('.exp-btn').addEventListener('click', () => {
+//     showAchievement("The Professional", "Unlocked: 4+ Years of Industry Journey.");
+// });
 
-document.querySelector('.skills-btn').addEventListener('click', () => {
-    showAchievement("Tech Master", "Unlocked: Full-Stack Tech Stack revealed.");
-});
+// document.querySelector('.skills-btn').addEventListener('click', () => {
+//     showAchievement("Tech Master", "Unlocked: Full-Stack Tech Stack revealed.");
+// });
+function resetHighScore() {
+    if (confirm("Reset high score?")) {
+        localStorage.removeItem('bubbleHighScore');
+        document.getElementById('high-score').innerText = '0';
+        showAchievement("Score Reset 🧹", "Aapka record saaf kar diya gaya hai.");
+    }
+}
 
 
 // Live Jackpot Ticker Logic
@@ -529,27 +327,68 @@ function handleDownload(btn) {
 
 // 1. Page load hote hi purana High Score check karein
 document.addEventListener('DOMContentLoaded', () => {
-    const savedHighScore = localStorage.getItem('bubbleHighScore') || 0;
-    const highScoreElement = document.getElementById('high-score');
-    if(highScoreElement) highScoreElement.innerText = savedHighScore;
+    gsap.to(".glow-ring", {
+        rotation: 360,
+        duration: 8, // Speed thodi fast ki hai
+        repeat: -1,
+        ease: "none"
+    });
+
 });
 
-// 2. Score update karne wala function (Ise apne game logic mein call karein)
-function updateHighScore(currentScore) {
-    const savedHighScore = parseInt(localStorage.getItem('bubbleHighScore') || 0);
-    
-    if (currentScore > savedHighScore) {
-        localStorage.setItem('bubbleHighScore', currentScore);
-        const highScoreElement = document.getElementById('high-score');
-        if(highScoreElement) {
-            highScoreElement.innerText = currentScore;
-            // GSAP effect for new high score
-            gsap.from(highScoreElement, { scale: 1.5, color: "#00f2fe", duration: 0.5 });
-        }
-        
-        // Achievement trigger karein
-        if(typeof showAchievement === 'function') {
-            showAchievement("New Record! 🎯", `Aapne ${currentScore} ka naya high score banaya!`);
-        }
+
+
+
+
+
+
+
+
+// hide this while uploading builds
+
+
+function openSuccess() {
+    // Mission Accomplished sound logic
+    if(typeof sounds !== 'undefined') {
+        sounds.pop.play(); // Bubble pop sound ya win sound use karein
     }
+
+    document.getElementById("successModal").style.display = "block";
+
+    // Achievement system ke saath integrate karein
+    if(typeof showAchievement === 'function') {
+        showAchievement("The Communicator", "Successfully established a secure link!");
+    }
+}
+
+// Glow Ring Color Transition (Gold to Blue)
+gsap.to(".glow-ring", {
+    borderColor: "#ffd700", // Gold
+    boxShadow: "0 0 20px #ffd700, inset 0 0 20px #ffd700",
+    duration: 3,
+    repeat: -1,
+    yoyo: true,
+    ease: "power1.inOut"
+});
+
+// main.js ke end mein ise replace karein
+window.onclick = function (e) {
+    if (e.target.className === 'modal') {
+        // Sabhi close functions ko ek saath call karein
+        if(typeof closeSkills === 'function') closeSkills();
+        if(typeof closeGame === 'function') closeGame();
+        if(typeof closeExperience === 'function') closeExperience();
+        if(typeof closeContact === 'function') closeContact();
+        if(typeof closeSuccess === 'function') closeSuccess();
+        if(typeof closeEducation === 'function') closeEducation();
+        if(typeof closeRTP === 'function') closeRTP();
+    }
+}
+
+// main.js mein social link par click listener add karein
+const waBtn = document.querySelector('.wa-btn');
+if(waBtn) {
+    waBtn.addEventListener('click', () => {
+        showAchievement("Direct Link 📱", "Opening WhatsApp to connect with Shubham...");
+    });
 }

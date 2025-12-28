@@ -97,7 +97,8 @@ header {
 
 .glow-ring {
     position: absolute;
-    width: 380px; /* Profile pic (350px) se thoda bada */
+    width: 380px;
+    /* Profile pic (350px) se thoda bada */
     height: 380px;
     border-radius: 50%;
     border: 3px dashed var(--neon-blue);
@@ -129,9 +130,17 @@ header {
 }
 
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
+
 .profile-pic {
     width: 350px;
     height: 350px;
@@ -372,11 +381,11 @@ header {
     cursor: pointer;
 }
 
-.card:hover {
+/* .card:hover {
     transform: translateY(-10px);
     border-color: var(--slot-gold);
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-}
+} */
 
 .card-img {
     height: 200px;
@@ -577,7 +586,7 @@ header {
     color: #555;
 }
 
-.float-wa {
+#float-wa {
     position: fixed;
     width: 60px;
     height: 60px;
@@ -665,51 +674,177 @@ header {
 
 /* ----------------------------------------------------------------------------------------------------------------------------- */
 /* --- 1. GLOBAL STYLES & CASINO THEME --- */
-        
 
-        body { 
-            margin: 0; overflow-x: hidden; background: var(--bg-dark); 
-            color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-        }
 
-        canvas#bg-canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none;}
-        .container { position: relative; max-width: 1200px; margin: 0 auto; padding: 20px; z-index: 10; }
+body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--bg-dark);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-        /* --- 2. HEADER SECTION --- */
-        header { 
-            min-height: 90vh; display: flex; flex-direction: row; 
-            justify-content: space-between; align-items: center; padding-top: 20px;
-        }
-        .hero-text { flex: 1; padding-right: 20px; z-index: 2; }
-        .hero-name { 
-            font-size: 5.5rem; margin: 0; font-weight: 800;
-            background: linear-gradient(to right, var(--neon-purple) 0%, var(--neon-blue) 100%); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
-            filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.3));
-            opacity: 0; transform: translateY(50px); animation: slideUpFade 0.8s ease-out forwards;
-        }
-        .hero-subtitle {
-            font-size: 1.6rem; color: #e0e0e0; margin-top: 10px; line-height: 1.4;
-            opacity: 0; transform: translateY(30px); animation: slideUpFade 0.8s ease-out 0.2s forwards;
-        }
-        .highlight { color: var(--slot-gold); font-weight: bold; }
-        .hero-img-container { flex: 0 0 400px; display: flex; justify-content: flex-end; align-items: center; opacity: 0; animation: fadeIn 1.5s ease-out 0.5s forwards; padding-left: 40px; }
-        .profile-pic { width: 350px; height: 350px; border-radius: 50%; object-fit: cover; border: 4px solid var(--neon-blue); box-shadow: 0 0 30px rgba(0, 242, 254, 0.3); animation: float 6s ease-in-out infinite; }
+canvas#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+}
 
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    z-index: 10;
+}
 
-        
-        
-        /* --- BUBBLE GAME UI INSIDE MODAL --- */
-        .game-wrapper { display: flex; flex-direction: row; gap: 10px; padding: 20px; background: #34495e; border-radius: 0 0 15px 15px; justify-content: center; align-items: flex-start; flex-wrap: wrap; }
-        #gameCanvas { background: #222; border-radius: 4px; cursor: crosshair; max-width: 100%; height: auto; border: 3px solid #111; }
-        .ui-panel { width: 180px; background: var(--panel-bg); padding: 15px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; color: #333; }
-        .score-box { background: #fff; padding: 10px; border-radius: 8px; width: 100%; margin-bottom: 15px; text-align: center; }
-        .score-val { font-size: 24px; font-weight: bold; color: var(--accent); }
-        #next-bubble-preview { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ccc; margin: 10px 0;}
-        .game-btn { padding: 10px 20px; background: var(--accent); color: white; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+/* --- 2. HEADER SECTION --- */
+header {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+}
 
-    /* Email Button Hover Color */
+.hero-text {
+    flex: 1;
+    padding-right: 20px;
+    z-index: 2;
+}
+
+.hero-name {
+    font-size: 5.5rem;
+    margin: 0;
+    font-weight: 800;
+    background: linear-gradient(to right, var(--neon-purple) 0%, var(--neon-blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.3));
+    opacity: 0;
+    transform: translateY(50px);
+    animation: slideUpFade 0.8s ease-out forwards;
+}
+
+.hero-subtitle {
+    font-size: 1.6rem;
+    color: #e0e0e0;
+    margin-top: 10px;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUpFade 0.8s ease-out 0.2s forwards;
+}
+
+.highlight {
+    color: var(--slot-gold);
+    font-weight: bold;
+}
+
+.hero-img-container {
+    flex: 0 0 400px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out 0.5s forwards;
+    padding-left: 40px;
+}
+
+.profile-pic {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--neon-blue);
+    box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+
+
+/* --- BUBBLE GAME UI INSIDE MODAL --- */
+.game-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 20px;
+    background: #34495e;
+    border-radius: 0 0 15px 15px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+#gameCanvas {
+    background: #222;
+    border-radius: 4px;
+    cursor: crosshair;
+    max-width: 100%;
+    height: auto;
+    border: 3px solid #111;
+}
+
+.ui-panel {
+    width: 180px;
+    background: var(--panel-bg);
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+}
+
+.score-box {
+    background: #fff;
+    padding: 10px;
+    border-radius: 8px;
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.score-val {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+#next-bubble-preview {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    margin: 10px 0;
+}
+
+.game-btn {
+    padding: 10px 20px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Email Button Hover Color */
 .social-btn.email-btn:hover {
     border-color: #ea4335;
     box-shadow: 0 0 15px rgba(234, 67, 53, 0.3);
@@ -724,28 +859,40 @@ header {
     border-color: #e4405f;
     box-shadow: 0 0 15px rgba(228, 64, 95, 0.4);
 }
-.social-btn.insta-btn:hover svg { fill: #e4405f; }
+
+.social-btn.insta-btn:hover svg {
+    fill: #e4405f;
+}
 
 /* Facebook Hover */
 .social-btn.fb-btn:hover {
     border-color: #1877f2;
     box-shadow: 0 0 15px rgba(24, 119, 242, 0.4);
 }
-.social-btn.fb-btn:hover svg { fill: #1877f2; }
+
+.social-btn.fb-btn:hover svg {
+    fill: #1877f2;
+}
 
 /* Twitter (X) Hover */
 .social-btn.x-btn:hover {
     border-color: #ffffff;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
 }
-.social-btn.x-btn:hover svg { fill: #ffffff; }
+
+.social-btn.x-btn:hover svg {
+    fill: #ffffff;
+}
 
 /* YouTube Hover */
 .social-btn.yt-btn:hover {
     border-color: #ff0000;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
-.social-btn.yt-btn:hover svg { fill: #ff0000; }
+
+.social-btn.yt-btn:hover svg {
+    fill: #ff0000;
+}
 
 
 
@@ -818,6 +965,30 @@ header {
     margin-bottom: 5px;
 }
 
+
+.company-logo-box {
+    width: 50px;
+    height: 50px;
+    background: var(--neon-blue);
+    color: black;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+    box-shadow: 0 0 15px var(--neon-blue);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+/* Hover Animation for Logo */
+.exp-item:hover .company-logo-box {
+    transform: scale(1.2) rotate(5deg);
+    background: var(--slot-gold);
+    box-shadow: 0 0 25px var(--slot-gold);
+    color: #000;
+}
 
 
 
@@ -921,7 +1092,8 @@ textarea.form-input {
 /* --- MOBILE RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
     header {
-        flex-direction: column-reverse !important; /* Image upar, text niche */
+        flex-direction: column-reverse !important;
+        /* Image upar, text niche */
         padding-top: 60px !important;
         text-align: center;
         min-height: auto !important;
@@ -933,8 +1105,10 @@ textarea.form-input {
     }
 
     .hero-name {
-        font-size: 2.8rem !important; /* Font size chota kiya */
-        white-space: normal !important; /* Name wrap ho sake */
+        font-size: 2.8rem !important;
+        /* Font size chota kiya */
+        white-space: normal !important;
+        /* Name wrap ho sake */
         line-height: 1.2;
     }
 
@@ -957,12 +1131,15 @@ textarea.form-input {
     .modal-content {
         width: 95% !important;
         margin: 10% auto !important;
-        max-height: 85vh; /* Screen se bahar na jaye */
-        overflow-y: auto !important; /* Scroll enable kiya */
+        max-height: 85vh;
+        /* Screen se bahar na jaye */
+        overflow-y: auto !important;
+        /* Scroll enable kiya */
     }
 
     .modal-body {
-        grid-template-columns: 1fr !important; /* Skills/Edu ek line mein */
+        grid-template-columns: 1fr !important;
+        /* Skills/Edu ek line mein */
         padding: 15px !important;
     }
 
@@ -975,7 +1152,8 @@ textarea.form-input {
     .btn {
         padding: 10px 20px !important;
         font-size: 0.9rem !important;
-        width: 100%; /* Mobile par full width buttons better lagte hain */
+        width: 100%;
+        /* Mobile par full width buttons better lagte hain */
     }
 
     /* Experience & Education list fix */
@@ -988,8 +1166,14 @@ textarea.form-input {
 
 /* Landscape/Tablet Fix */
 @media (min-width: 769px) and (max-width: 1024px) {
-    .hero-name { font-size: 4rem !important; }
-    .profile-pic { width: 280px !important; height: 280px !important; }
+    .hero-name {
+        font-size: 4rem !important;
+    }
+
+    .profile-pic {
+        width: 280px !important;
+        height: 280px !important;
+    }
 }
 
 
@@ -1001,14 +1185,26 @@ textarea.form-input {
 
 
 
+/* style.css mein Confetti style ke liye add karein */
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    z-index: 11000;
+    pointer-events: none;
+}
 
-
-
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
+}
 
 
 
 /* --- RESPONSIVE FIXES --- */
 @media (max-width: 768px) {
+
     /* Profile Image Container */
     .hero-img-container {
         flex: 0 0 auto !important;
@@ -1026,6 +1222,7 @@ textarea.form-input {
         width: clamp(220px, 55vw, 320px) !important;
         height: clamp(220px, 55vw, 320px) !important;
     }
+
 
     /* Modal Responsiveness */
     .modal-content {
@@ -1050,3 +1247,19 @@ textarea.form-input {
 }
 
 
+.glow-ring {
+    /* ... baki purana code ... */
+    transform-origin: center;
+    /* Yeh ensure karta hai ki center se ghume */
+    display: block;
+}
+
+
+.card-content p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Sirf 2 lines dikhegi */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 2.8em; /* Consistency ke liye */
+}
