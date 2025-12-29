@@ -1052,7 +1052,7 @@ textarea.form-input {
 
 
 
-.education-body {
+/* .education-body {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -1071,10 +1071,36 @@ textarea.form-input {
 .edu-item:hover {
     background: rgba(255, 215, 0, 0.1);
     transform: translateX(5px);
+} */
+
+
+/* education.js se linked modal-body ko target karein */
+.education-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Gap kam kiya */
+    padding: 20px; /* Padding kam ki */
 }
 
+/* Modal Content specific to Education */
+#educationModal .modal-content {
+    max-height: 85vh; /* Maximum height set ki */
+    overflow-y: auto; /* Agar content badhe to scroll ho */
+}
 
+.edu-item {
+    padding: 10px 15px; /* Compact padding */
+    margin-bottom: 5px;
+}
 
+.edu-item h3 {
+    font-size: 1.1rem; /* Font size thoda chota */
+    margin-bottom: 2px;
+}
+
+.edu-item .company-name {
+    font-size: 0.95rem;
+}
 
 
 

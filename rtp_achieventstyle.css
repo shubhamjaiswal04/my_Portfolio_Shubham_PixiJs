@@ -1,9 +1,37 @@
 
 /* RTP Result Styling */
 #rtpDisplay { text-shadow: 0 0 15px var(--neon-blue); }
-
-/* Toast Styling */
 .toast {
+    position: fixed;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Mobile par full width ke karib */
+    max-width: 400px; /* Desktop par limit */
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid var(--slot-gold);
+    padding: 12px 20px;
+    border-radius: 15px; /* Desktop par round, mobile par thoda kam */
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 99999;
+    transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-sizing: border-box;
+}
+
+/* Mobile adjustments for Toast */
+@media (max-width: 600px) {
+    .toast {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    .toast-icon {
+        font-size: 1.2rem;
+    }
+}
+/* Toast Styling */
+/* .toast {
     position: fixed;
     bottom: -100px;
     left: 50%;
@@ -18,26 +46,11 @@
     z-index: 9999;
     transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
-}
+}*/
 .toast.show { bottom: 30px; }
-.toast-icon { font-size: 1.5rem; }
+.toast-icon { font-size: 1.5rem; } 
 
 
-
-
-/* Jackpot Ticker */
-/* .jackpot-ticker {
-    margin-top: 15px;
-    padding: 8px 15px;
-    background: rgba(231, 76, 60, 0.1);
-    border: 1px solid var(--accent);
-    color: var(--slot-gold);
-    border-radius: 5px;
-    display: inline-block;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    letter-spacing: 1px;
-} */
 
 
 /* Code Box */
