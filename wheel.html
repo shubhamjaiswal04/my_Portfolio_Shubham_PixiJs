@@ -1,0 +1,249 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PixiJS v8 Spin Wheel - Fixed</title>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.min.js"></script>
+    <style>
+        body { margin: 0; padding: 0; background: #0a0a12; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Segoe UI', sans-serif; color: #fff; }
+        .container { display: flex; flex-direction: column; align-items: center; }
+        canvas { border: 4px solid #00f7ff; border-radius: 20px; box-shadow: 0 0 50px rgba(0, 247, 255, 0.2); }
+        button { margin-top: 20px; padding: 15px 40px; font-size: 1.2rem; background: #00f7ff; color: #000; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        button:disabled { background: #333; color: #666; cursor: not-allowed; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 style="color: #00f7ff; text-shadow: 0 0 10px #00f7ff;">MEGA SPIN V8</h1>
+        <div id="pixi-canvas-container"></div>
+        <button id="spinButton">SPIN WHEEL</button>
+        <p id="resultText" style="margin-top: 15px; font-weight: bold; height: 20px;"></p>
+    </div>
+
+<script type="module">
+    // 1. Wrap everything in an async IIFE
+    (async () => {
+        const GAME_SIZE = 500;
+        const NUM_SEGMENTS = 8;
+        const LABELS = ["100 PTS", "LOSE", "500 PTS", "BANKRUPT", "200 PTS", "FREE SPIN", "50 PTS", "JACKPOT!"];
+        const COLORS = [0xff0066, 0x00f7ff, 0xffcc00, 0x39ff14, 0x9d00ff, 0xff5e00, 0x00ffcc, 0xff00ff];
+
+        const app = new PIXI.Application();
+        await app.init({ 
+            width: GAME_SIZE, 
+            height: GAME_SIZE, 
+            backgroundColor: 0x0a0a12,
+            antialias: true 
+        });
+        document.getElementById('pixi-canvas-container').appendChild(app.canvas);
+
+        // --- OBJECT POOLING FOR SEGMENTS ---
+        class SegmentPool {
+            constructor() { this._pool = []; }
+            get(index, color) {
+                let seg = this._pool.length > 0 ? this._pool.pop() : new PIXI.Graphics();
+                const angle = (Math.PI * 2) / NUM_SEGMENTS;
+                seg.clear()
+                   .moveTo(0, 0)
+                   .arc(0, 0, 200, 0, angle)
+                   .lineTo(0, 0)
+                   .fill(color)
+                   .stroke({ width: 2, color: 0xffffff });
+                seg.rotation = index * angle;
+                seg.visible = true;
+                return seg;
+            }
+            recycle(seg) { seg.visible = false; this._pool.push(seg); }
+        }
+
+        const pool = new SegmentPool();
+        const wheel = new PIXI.Container();
+        wheel.x = GAME_SIZE / 2;
+        wheel.y = GAME_SIZE / 2;
+        app.stage.addChild(wheel);
+
+        // Populate Wheel using Pool
+        for(let i=0; i < NUM_SEGMENTS; i++) {
+            const segment = pool.get(i, COLORS[i]);
+            
+            // Add text to each segment
+            const txt = new PIXI.Text({
+                text: LABELS[i],
+                style: { fill: 0xffffff, fontSize: 16, fontWeight: 'bold' }
+            });
+            txt.anchor.set(0, 0.5);
+            txt.x = 60;
+            txt.y = 20; 
+            segment.addChild(txt);
+            wheel.addChild(segment);
+        }
+
+        // Pointer
+        const pointer = new PIXI.Graphics().poly([0,0, 40,0, 20,40]).fill(0xffffff);
+        pointer.x = (GAME_SIZE / 2) - 20;
+        pointer.y = 20;
+        app.stage.addChild(pointer);
+
+        // --- SPIN LOGIC ---
+        let isSpinning = false;
+        let speed = 0;
+        const friction = 0.985;
+        const resultText = document.getElementById('resultText');
+        const spinBtn = document.getElementById('spinButton');
+
+        spinBtn.onclick = () => {
+            if(isSpinning) return;
+            isSpinning = true;
+            spinBtn.disabled = true;
+            resultText.innerText = "Good Luck!";
+            speed = 0.6 + Math.random() * 0.4; // Initial velocity
+        };
+
+        app.ticker.add((time) => {
+            if(isSpinning) {
+                wheel.rotation += speed * time.deltaTime;
+                speed *= friction;
+
+                if(speed < 0.002) {
+                    isSpinning = false;
+                    speed = 0;
+                    spinBtn.disabled = false;
+                    calculateResult();
+                }
+            }
+        });
+
+        function calculateResult() {
+            let rot = wheel.rotation % (Math.PI * 2);
+            if(rot < 0) rot += Math.PI * 2;
+            
+            // Adjusting for pointer position (Top)
+            const anglePerSeg = (Math.PI * 2) / NUM_SEGMENTS;
+            const effectiveRotation = (Math.PI * 2) - rot + (Math.PI * 1.5); 
+            const index = Math.floor((effectiveRotation % (Math.PI * 2)) / anglePerSeg);
+            
+            resultText.innerText = "RESULT: " + LABELS[index];
+            resultText.style.color = "#00f7ff";
+        }
+
+    })(); // IIFE closing
+</script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixiJS v8 Spin & Particles</title>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@8/dist/pixi.min.js"></script>
+    <style>
+        body { margin: 0; background: #05050a; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: 'Segoe UI', sans-serif; color: white; }
+        .wrapper { display: flex; flex-direction: column; align-items: center; }
+        canvas { border: 2px solid #00f7ff; border-radius: 50%; box-shadow: 0 0 40px rgba(0, 247, 255, 0.3); }
+        button { margin-top: 25px; padding: 12px 45px; background: #00f7ff; border: none; border-radius: 30px; font-weight: bold; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        button:hover { transform: scale(1.05); box-shadow: 0 0 20px #00f7ff; }
+        button:disabled { background: #222; color: #555; }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <h1 id="statusText" style="color: #00f7ff; margin-bottom: 15px;">SPIN THE WHEEL!</h1>
+        <div id="game-container"></div>
+        <button id="spinBtn">SPIN</button>
+    </div>
+
+<script type="module">
+    (async () => {
+        const app = new PIXI.Application();
+        const SIZE = 450;
+        await app.init({ width: SIZE, height: SIZE, backgroundAlpha: 0, antialias: true });
+        document.getElementById('game-container').appendChild(app.canvas);
+
+        const LABELS = ["BIG WIN", "LOSE", "100$", "TRY AGAIN", "JACKPOT", "50$", "FREE SPIN", "BONUS"];
+        const COLORS = [0xff0066, 0x00f7ff, 0xffcc00, 0x39ff14, 0x9d00ff, 0xff5e00, 0x00ffcc, 0xf700ff];
+        
+        // --- 1. Wheel Setup ---
+        const wheel = new PIXI.Container();
+        wheel.x = SIZE/2; wheel.y = SIZE/2;
+        app.stage.addChild(wheel);
+
+        for(let i=0; i<8; i++) {
+            const seg = new PIXI.Graphics()
+                .moveTo(0,0).arc(0,0, 200, 0, (Math.PI*2)/8).lineTo(0,0)
+                .fill(COLORS[i]).stroke({width: 2, color: 0xffffff});
+            seg.rotation = i * (Math.PI*2)/8;
+            
+            const txt = new PIXI.Text({text: LABELS[i], style: {fill: '#fff', fontSize: 14, fontWeight: 'bold'}});
+            txt.anchor.set(0, 0.5); txt.x = 60; txt.y = 25;
+            seg.addChild(txt);
+            wheel.addChild(seg);
+        }
+
+        const pointer = new PIXI.Graphics().poly([0,0, 30,0, 15,35]).fill(0xffffff);
+        pointer.x = SIZE/2 - 15; pointer.y = 10;
+        app.stage.addChild(pointer);
+
+        // --- 2. Optimized Particle System ---
+        const particles = [];
+        const particleContainer = new PIXI.Container();
+        app.stage.addChild(particleContainer);
+
+        function createExplosion() {
+            for(let i=0; i<50; i++) {
+                const p = new PIXI.Graphics().rect(0,0, 6, 6).fill(0x00f7ff);
+                p.x = SIZE/2; p.y = SIZE/2;
+                p.vx = (Math.random() - 0.5) * 10;
+                p.vy = (Math.random() - 0.5) * 10;
+                p.life = 1.0;
+                particleContainer.addChild(p);
+                particles.push(p);
+            }
+        }
+
+        // --- 3. Spin Logic ---
+        let isSpinning = false;
+        let speed = 0;
+        const btn = document.getElementById('spinBtn');
+        const status = document.getElementById('statusText');
+
+        btn.onclick = () => {
+            if(isSpinning) return;
+            isSpinning = true; btn.disabled = true;
+            speed = 0.5 + Math.random() * 0.5;
+            status.innerText = "Spinning...";
+        };
+
+        app.ticker.add((time) => {
+            if(isSpinning) {
+                wheel.rotation += speed * time.deltaTime;
+                speed *= 0.985;
+                if(speed < 0.002) {
+                    isSpinning = false; speed = 0; btn.disabled = false;
+                    createExplosion();
+                    status.innerText = "CONGRATULATIONS!";
+                }
+            }
+
+            // Update Particles
+            for(let i=particles.length-1; i>=0; i--) {
+                const p = particles[i];
+                p.x += p.vx; p.y += p.vy;
+                p.vy += 0.2; // Gravity
+                p.life -= 0.02;
+                p.alpha = p.life;
+                if(p.life <= 0) {
+                    particleContainer.removeChild(p);
+                    particles.splice(i, 1);
+                }
+            }
+        });
+    })();
+</script>
+</body>
+</html>

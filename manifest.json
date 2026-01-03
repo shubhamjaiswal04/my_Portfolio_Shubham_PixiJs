@@ -1,0 +1,21 @@
+{
+  "bundles": [
+    {
+      "name": "spinGameAssets",
+      "assets": [
+        {
+          "name": "wheelBg",
+          "srcs": "assets/wheel_background.png"
+        },
+        {
+          "name": "pointer",
+          "srcs": "assets/wheel_pointer.png"
+        },
+        {
+          "name": "segment",
+          "srcs": "assets/wheel_segment.png"
+        }
+      ]
+    }
+  ]
+}
