@@ -1329,7 +1329,16 @@ textarea.form-input {
     max-height: 90vh;
     overflow-y: auto;
 }
-
+/* style.css mein successModal ka section isse update karein */
+#successModal .modal-content {
+    max-width: 450px;
+    text-align: center;
+    border: 2px solid var(--slot-gold);
+    background: #000;
+    position: relative;
+    overflow: hidden; /* Content ko bahar nikalne se rokega */
+    margin: 10vh auto; /* Screen ke beech mein rakhega */
+}
 .toast.show { 
     bottom: 30px !important; 
     opacity: 1 !important;
@@ -1342,5 +1351,22 @@ textarea.form-input {
     margin: 0 auto;
     border: 2px solid var(--neon-blue); /* Thoda border taaki edge saaf dikhe */
 }
+/* rtp_achieventstyle.css ya style.css mein */
+.toast {
+    position: fixed;
+    bottom: -150px; /* Thoda aur niche hide karein */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999999;
+    /* Baki properties same rahegi */
+}
 
+.toast.show {
+    bottom: 30px !important; /* Screen ke andar lane ke liye */
+}
 
+/* style.css mein add karein */
+body.modal-open {
+    overflow: hidden;
+    padding-right: 0px; /* Layout shift rokne ke liye */
+}

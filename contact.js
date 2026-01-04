@@ -10,6 +10,7 @@ function closeContact() {
 
 // contact.js mein openSuccess ko update karein
 function openSuccess() {
+    document.body.classList.add('modal-open'); // Scroll lock on
     if (typeof sounds !== 'undefined') sounds.pop.play();
     document.getElementById("successModal").style.display = "block";
 
@@ -46,13 +47,11 @@ function createConfetti() {
         onComplete: () => confetti.remove()
     });
 }
-// function openSuccess() {
-//     if (typeof sounds !== 'undefined') sounds.pop.play();
-//     document.getElementById("successModal").style.display = "block";
-// }
 
 function closeSuccess() {
+    document.body.classList.remove('modal-open'); // Scroll lock off
     document.getElementById("successModal").style.display = "none";
+    
 }
 
 // Form Submission Logic
