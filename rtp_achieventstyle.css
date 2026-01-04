@@ -20,6 +20,19 @@
     box-sizing: border-box;
 }
 
+/* rtp_achieventstyle.css */
+.toast {
+    /* ... baki properties ... */
+    z-index: 100000 !important; /* Modal se bhi upar */
+    opacity: 0;
+    visibility: hidden;
+}
+
+.toast.show {
+    bottom: 30px !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
 /* Mobile adjustments for Toast */
 @media (max-width: 600px) {
     .toast {

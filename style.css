@@ -1322,3 +1322,25 @@ textarea.form-input {
     z-index: 20000 !important;
     pointer-events: auto !important; 
 }
+/* style.css ke end mein ye add karein */
+#successModal .modal-content {
+    background: #000 !important;
+    border: 2px solid var(--slot-gold) !important;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.toast.show { 
+    bottom: 30px !important; 
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+#gameCanvas {
+    max-width: 100% !important; /* Mobile par screen se bahar nahi jayega */
+    height: auto !important;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid var(--neon-blue); /* Thoda border taaki edge saaf dikhe */
+}
+
+

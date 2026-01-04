@@ -1,4 +1,3 @@
-// game.js
 let shotCount = 0;
 const BOMB_COLOR = '#000000';
 let gameParticles = []; 
@@ -29,20 +28,44 @@ function handleAim(e) {
     angle = Math.max(-2.9, Math.min(-0.2, angle));
 }
 
+// FIXED: Restart par score UI aur internal variable dono reset honge
 function init() {
     canvas = document.getElementById('gameCanvas');
     if (!canvas) return;
+    canvas.width = 415; 
+    canvas.height = 600;
     ctx = canvas.getContext('2d');
     canvas.onmousedown = handleShoot;
     canvas.onmousemove = handleAim;
 
-    grid = []; fallingBubbles = []; score = 0; isGameOver = false;
+    // Resetting Variables
+    grid = []; 
+    fallingBubbles = []; 
+    bullet = null;
+    score = 0; // Internal score reset
+    isGameOver = false;
+    shotCount = 0;
+
+    // Resetting UI elements
+    const scoreElement = document.getElementById('score');
+    if (scoreElement) scoreElement.innerText = "0"; // UI score reset fix
+
+    const levelElement = document.getElementById('current-level');
+    if (levelElement) levelElement.innerText = "1";
+
+    // LocalStorage se Best Score load karna
+    const savedHS = localStorage.getItem('bubbleHighScore') || 0;
+    const hsDisplay = document.getElementById('high-score');
+    if (hsDisplay) hsDisplay.innerText = savedHS;
+
+    // Grid Initialization
     for (let r = 0; r < ROWS; r++) {
         grid[r] = [];
         for (let c = 0; c < COLS; c++) {
             grid[r][c] = { active: r < 6, color: r < 6 ? getRandomColor() : null };
         }
     }
+    
     nextBubbleColor = getRandomColor();
     loadLauncher();
 }
@@ -67,6 +90,7 @@ function snapToGrid(b) {
                 }
             });
             dropFloaters();
+            updateUIAfterMatch();
             return true;
         }
         grid[closest.r][closest.c] = { active: true, color: b.color };
@@ -77,11 +101,45 @@ function snapToGrid(b) {
                 grid[m.r][m.c].active = false; score += 10;
             });
             dropFloaters();
+            updateUIAfterMatch();
         } else if (closest.r >= 12) isGameOver = true;
-        document.getElementById('score').innerText = score;
+        
         return true;
     }
     return false;
+}
+
+// function updateUIAfterMatch() {
+//     const scoreElement = document.getElementById('score');
+//     if (scoreElement) scoreElement.innerText = score;
+    
+//     if (typeof updateHighScore === 'function') {
+//         updateHighScore(score);
+//     }
+// }
+function updateUIAfterMatch() {
+    const scoreElement = document.getElementById('score');
+    if (scoreElement) scoreElement.innerText = score;
+    
+    // LEVEL LOGIC: Har 500 points par level up
+    let newLevel = Math.floor(score / 500) + 1;
+    const levelElement = document.getElementById('current-level');
+    
+    if (levelElement && parseInt(levelElement.innerText) !== newLevel) {
+        levelElement.innerText = newLevel;
+        
+        // Difficulty badhane ke liye speed badhayein
+        bubbleSpeed = 15 + (newLevel * 2); 
+        
+        // Toaster message for Level Up
+        if (typeof showAchievement === 'function') {
+            showAchievement("Level Up! ⬆️", "Reached Level " + newLevel);
+        }
+    }
+    
+    if (typeof updateHighScore === 'function') {
+        updateHighScore(score);
+    }
 }
 
 function dropFloaters() {
@@ -115,9 +173,10 @@ function findMatches(r, c, col) {
     return found;
 }
 
+// FIXED: Side cutting margin calculation
 function getTileCoordinate(r, c) {
-    let x = c * DIAMETER + RADIUS + (r % 2 !== 0 ? RADIUS : 0);
-    let y = r * (DIAMETER * 0.85) + RADIUS;
+   let x = c * 48.5 + RADIUS + 10 + (r % 2 !== 0 ? RADIUS : 0); 
+    let y = r * (DIAMETER * 0.85) + RADIUS + 5;
     return { x, y };
 }
 
@@ -185,4 +244,8 @@ function gameLoop() { if (document.getElementById('gameModal').style.display ===
 
 init();
 gameLoop();
-function resetGame() { init(); }
+
+// Restart trigger
+function resetGame() { 
+    init(); 
+}

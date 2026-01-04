@@ -56,6 +56,31 @@ function erase() {
         setTimeout(type, 500);
     }
 }
+// main.js mein ye function add karein (Toaster message ke liye)
+function showAchievement(title, message) {
+    const toast = document.getElementById("achievement-toast");
+    if (!toast) return;
+    
+    document.getElementById("toast-title").innerText = title;
+    document.getElementById("toast-msg").innerText = message;
+    
+    toast.classList.add("show");
+    if (typeof sounds !== 'undefined' && sounds.pop) sounds.pop.play();
+
+    setTimeout(() => {
+        toast.classList.remove("show");
+    }, 4000);
+}
+
+// High Score Save/Load Logic (LocalStorage ke liye)
+function updateHighScore(newScore) {
+    const savedHS = parseInt(localStorage.getItem('bubbleHighScore') || 0);
+    if (newScore > savedHS) {
+        localStorage.setItem('bubbleHighScore', newScore);
+        document.getElementById('high-score').innerText = newScore;
+        showAchievement("New High Score! 🏆", `You reached ${newScore} points!`);
+    }
+}
 
 window.addEventListener('load', () => {
     type();
@@ -66,7 +91,38 @@ function openSkills() { document.getElementById("skillsModal").style.display = "
 function closeSkills() { document.getElementById("skillsModal").style.display = "none"; }
 function openExperience() { document.getElementById("experienceModal").style.display = "block"; }
 function closeExperience() { document.getElementById("experienceModal").style.display = "none"; }
+// main.js ke end mein add karein
+function openRTP() {
+    if (typeof sounds !== 'undefined') sounds.click.play();
+    document.getElementById("rtpModal").style.display = "block";
+}
 
+function closeRTP() {
+    document.getElementById("rtpModal").style.display = "none";
+}
+
+function calculateRTP() {
+    const bet = parseFloat(document.getElementById('totalBet').value);
+    const win = parseFloat(document.getElementById('totalWin').value);
+    const resultDiv = document.getElementById('rtpResult');
+    const display = document.getElementById('rtpDisplay');
+
+    if (bet > 0) {
+        const rtp = ((win / bet) * 100).toFixed(2);
+        display.innerText = rtp + "%";
+        resultDiv.style.display = 'block';
+        
+        const status = document.getElementById('rtpStatus');
+        if (rtp >= 92 && rtp <= 98) {
+            status.innerText = "Certified Standard (GLI)";
+            status.style.color = "#2ecc71";
+        } else {
+            status.innerText = "High Volatility detected";
+            status.style.color = "#f1c40f";
+        }
+        showAchievement("Math Engine Analyzed ⚙️", `Theoretical RTP calculated at ${rtp}%`);
+    }
+}
 window.onclick = function (e) {
     if (e.target.className === 'modal') {
         const modals = ['skillsModal', 'gameModal', 'experienceModal', 'contactModal', 'educationModal', 'rtpModal'];
