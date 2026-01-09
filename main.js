@@ -1,19 +1,58 @@
-// main.js
-// const sounds = {
-//     bg: new Howl({ src: ['https://cdn.pixabay.com/audio/2022/01/18/audio_d0c6ff1da4.mp3'], loop: true, volume: 0.1, html5: true }),
-//     shoot: new Howl({ src: ['https://freesound.org/data/previews/341/341695_5858296-lq.mp3'], volume: 0.3 }),
-//     pop: new Howl({ src: ['https://freesound.org/data/previews/411/411642_5121236-lq.mp3'], volume: 0.4 }),
-//     click: new Howl({ src: ['https://freesound.org/data/previews/256/256113_3263906-lq.mp3'], volume: 0.2 }),
-//     gameOver: new Howl({ src: ['https://freesound.org/data/previews/173/173859_2518933-lq.mp3'], volume: 0.5 })
-// };
+
+// Disable Right Click
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
+// Optional: Disable F12 and Inspect Element shortcuts
+document.onkeydown = function(e) {
+    if (e.keyCode == 123) { // F12
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
+        return false;
+    }
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
+        return false;
+    }
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (View Source)
+        return false;
+    }
+};
+
+
+
+
 
 const sounds = {
-    bg: new Howl({ src: [''], loop: true, volume: 0.1, html5: true }),
-    shoot: new Howl({ src: [''], volume: 0.3 }),
-    pop: new Howl({ src: [''], volume: 0.4 }),
-    click: new Howl({ src: [''], volume: 0.2 }),
-    gameOver: new Howl({ src: [''], volume: 0.5 })
+    bg: new Howl({ src: ['./src/assets/Audio/Yucatan_BG_Sound.mp3'], loop: true, volume: 0.5, html5: true }),
+    shoot: new Howl({ src: ['./src/assets/Audio/burstSound.mp3'], volume: 0.3 }),
+    pop: new Howl({ src: ['./src/assets/Audio/big win game sound.mp3'], volume: 0.4 }),
+    click: new Howl({ src: ['./src/assets/Audio/Button_Sound_3.mp3'], volume: 0.2 }),
+    gameOver: new Howl({ src: ['./src/assets/Audio/big win game sound.mp3'],loop: false, volume: 0.5 })
 };
+let isMuted = false;
+
+function toggleMute() {
+    isMuted = !isMuted;
+    
+    // Howler.js global volume control
+    if (isMuted) {
+        Howler.volume(0); 
+        document.getElementById("muteBtn").innerText = "🔇 Unmute";
+        document.getElementById("muteBtn").style.background = "#e74c3c"; // Red highlight
+    } else {
+        Howler.volume(1); 
+        document.getElementById("muteBtn").innerText = "🔊 Mute";
+        document.getElementById("muteBtn").style.background = "#555"; // Original color
+    }
+    
+    // Sound effect on click
+    if(typeof sounds !== 'undefined' && sounds.click) {
+        sounds.click.play();
+    }
+}
+
 function openGame() {
     sounds.click.play();
     sounds.bg.play();
@@ -28,6 +67,7 @@ function closeGame() {
 }
 
 function toggleGames() {
+    sounds.click.play();
     let h = document.getElementById('hidden-games'), b = document.getElementById('toggleBtn');
     if (h.style.display === 'none') { h.style.display = 'block'; b.innerHTML = 'Show Less ▲'; }
     else { h.style.display = 'none'; b.innerHTML = 'View All Games ▼'; }
@@ -87,46 +127,106 @@ window.addEventListener('load', () => {
     gsap.to(".glow-ring", { rotation: 360, duration: 8, repeat: -1, ease: "none" });
 });
 
-function openSkills() { document.getElementById("skillsModal").style.display = "block"; }
-function closeSkills() { document.getElementById("skillsModal").style.display = "none"; }
-function openExperience() { document.getElementById("experienceModal").style.display = "block"; }
-function closeExperience() { document.getElementById("experienceModal").style.display = "none"; }
+function openSkills() { 
+    sounds.click.play()
+    document.getElementById("skillsModal").style.display = "block";
+ }
+function closeSkills() { sounds.click.play();
+    document.getElementById("skillsModal").style.display = "none"; }
+function openExperience() {sounds.click.play(); document.getElementById("experienceModal").style.display = "block"; }
+function closeExperience() {sounds.click.play(); document.getElementById("experienceModal").style.display = "none"; }
 // main.js ke end mein add karein
 function openRTP() {
+    
     if (typeof sounds !== 'undefined') sounds.click.play();
     document.getElementById("rtpModal").style.display = "block";
+    
 }
 
 function closeRTP() {
+    sounds.click.play();
     document.getElementById("rtpModal").style.display = "none";
 }
-
 function calculateRTP() {
-    const bet = parseFloat(document.getElementById('totalBet').value);
-    const win = parseFloat(document.getElementById('totalWin').value);
-    const resultDiv = document.getElementById('rtpResult');
-    const display = document.getElementById('rtpDisplay');
+        sounds.click.play();
+
+    const bet = parseFloat(document.getElementById("totalBet").value);
+    const win = parseFloat(document.getElementById("totalWin").value);
+    const display = document.getElementById("rtpDisplay");
+    const resultDiv = document.getElementById("rtpResult");
+    const status = document.getElementById("rtpStatus");
 
     if (bet > 0) {
         const rtp = ((win / bet) * 100).toFixed(2);
+        resultDiv.style.display = "block";
         display.innerText = rtp + "%";
-        resultDiv.style.display = 'block';
         
-        const status = document.getElementById('rtpStatus');
+        // Status Check Logic
         if (rtp >= 92 && rtp <= 98) {
-            status.innerText = "Certified Standard (GLI)";
-            status.style.color = "#2ecc71";
+            status.innerText = "✅ GLI COMPLIANT: Standard Market RTP";
+            status.style.color = "#25d366"; // Green
+        } else if (rtp > 98) {
+            status.innerText = "🔥 HIGH PAYOUT: Player Advantage Mode";
+            status.style.color = "#4facfe"; // Blue
         } else {
-            status.innerText = "High Volatility detected";
-            status.style.color = "#f1c40f";
+            status.innerText = "⚠️ HIGH VOLATILITY: Operator Advantage Mode";
+            status.style.color = "#ff4757"; // Red
         }
-        showAchievement("Math Engine Analyzed ⚙️", `Theoretical RTP calculated at ${rtp}%`);
+                showAchievement("Math Engine Analyzed ⚙️", `Theoretical RTP calculated at ${rtp}%`);
+
+        gsap.from(display, { scale: 0.5, opacity: 0, duration: 0.5, ease: "back.out(1.7)" });
+    } else {
+        alert("Please enter a valid Bet amount.");
     }
 }
+
 window.onclick = function (e) {
     if (e.target.className === 'modal') {
         const modals = ['skillsModal', 'gameModal', 'experienceModal', 'contactModal', 'educationModal', 'rtpModal'];
         modals.forEach(m => document.getElementById(m).style.display = 'none');
         sounds.bg.stop();
     }
+}
+
+function playGif(card) {
+    const img = card.querySelector('img');
+    const gifUrl = img.getAttribute('data-gif');
+    if (gifUrl) {
+        img.src = gifUrl; // Hover par GIF load karega
+    }
+}
+
+function stopGif(card) {
+    const img = card.querySelector('img');
+    const staticUrl = img.getAttribute('data-static');
+    if (staticUrl) {
+        img.src = staticUrl; // Mouse hatate hi static image wapas
+    }
+}
+
+function handleDownload(btn) {
+    const loader = btn.querySelector('.btn-loader');
+    const text = btn.querySelector('.btn-text');
+    const resumePath = "./src/Resume/Shubham_Jaiswal_Resume_2026_01_09.pdf"; //resume path
+
+    // Button Animation
+    text.style.display = 'none';
+    loader.style.display = 'inline-block';
+
+    setTimeout(() => {
+        // Download Trigger
+        const link = document.createElement('a');
+        link.href = resumePath;
+        link.download = "Shubham_Jaiswal_Resume_2026_01_09.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        // Reset Button
+        text.style.display = 'inline-flex';
+        loader.style.display = 'none';
+        
+        // Success Toast (Optional)
+        showToast("Resume Download Started!"); 
+    }, 1000); // 1 sec ka professional delay
 }

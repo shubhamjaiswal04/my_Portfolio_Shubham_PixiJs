@@ -1240,10 +1240,10 @@ textarea.form-input {
 
 .card-content p {
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Sirf 2 lines dikhegi */
+    /*-webkit-line-clamp: 2;  Sirf 2 lines dikhegi 
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis;*/
     min-height: 2.8em; /* Consistency ke liye */
 }
 

@@ -4,15 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shubham Jaiswal | Senior Game Developer</title>
+    <title>Shubham Jaiswal</title>
+    <link rel="icon" href="https://img.icons8.com/neon/96/slot-machine.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@8.x/dist/pixi.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/PixiPlugin.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js"></script>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./cards.css">
     <link rel="stylesheet" href="./rtp_achieventstyle.css">
 </head>
 
@@ -53,13 +52,6 @@
                             Games</span> using <b style="color: var(--neon-purple);">PixiJS</b>, ranging from classic
                         reels to advanced multi-feature titles.
                     </p>
-                    <!-- <p>
-                        My core strength lies in bridging the gap between <b
-                            style="color: var(--slot-gold);">Mathematical Precision</b> and <b
-                            style="color: var(--neon-blue);">Visual Excellence</b>.
-                        I specialize in developing robust <span class="highlight">Math Engines, RNG systems, and RTP
-                            simulators</span> that meet strict industry certification standards (GLI).
-                    </p> -->
                     <p>
                         A proactive problem-solver and collaborative team player, I excel in fast-paced environments,
                         ensuring seamless <b style="color: var(--neon-purple);">API integrations</b> and cross-platform
@@ -327,21 +319,21 @@
                     <div class="skill-category">
                         <!-- <h3>Core Tech</h3> -->
                         <div class="skill-list"><span class="skill-tag">PixiJS</span>
-                            <span class="skill-tag">JavaScript</span><span class="skill-tag">Html</span>
-                            <span class="skill-tag">CSS</span><span class="skill-tag">GSAP</span>
-                            <span class="skill-tag">.Net core</span>
-                            <span class="skill-tag">MS-SQL Server</span><span class="skill-tag">HTML5 Canvas</span>
+                            <span class="skill-tag">JavaScript</span><span class="skill-tag">GSAP</span>
+                            <span class="skill-tag">Spine-Animation</span><span class="skill-tag">HTML5 Canvas</span>
+                             <span class="skill-tag">WebGL</span><span class="skill-tag">Cross-platform development</span>
+                           <span class="skill-tag">Slot Games</span>
+                            <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">C#</span>
+                            <span class="skill-tag">.Net Core</span><span class="skill-tag">MS-SQL Server</span>
                             <span class="skill-tag">REST API Integration</span><span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Postman</span><span class="skill-tag">Cross-platform
-                                development</span>
-                            <span class="skill-tag">Game performance optimization</span><span
-                                class="skill-tag">Multitasking</span>
+                            <span class="skill-tag">Postman</span>
+                            <span class="skill-tag">Game performance optimization</span>
+                            <span class="skill-tag">Multitasking</span><span class="skill-tag">WebGL</span>
                             <span class="skill-tag">Problem Solving</span><span class="skill-tag">Communication</span>
-                            <span class="skill-tag">Team collaboration</span><span class="skill-tag">WebGL</span>
-                            <span class="skill-tag">C#</span><span class="skill-tag">Slot Logic</span>
+                            <span class="skill-tag">Team collaboration</span>
                             <span class="skill-tag">TFS</span><span class="skill-tag">Git</span>
                             <span class="skill-tag">SVN</span><span class="skill-tag">VS Code</span>
-                            <span class="skill-tag">Visual Studio</span><span class="skill-tag">Spine</span>
+                            <span class="skill-tag">Visual Studio</span>
 
                         </div>
 
@@ -406,46 +398,56 @@
 
             </div>
 
-            <div class="card" onclick="playSpin(this)">
-                <div class="card-img"><img src="./src/assets/Lobby.png" loading="lazy"></div>
+            <div class="card" onmouseover="playGif(this)" onmouseout="stopGif(this)">
+                <div class="card-img"><img src="./src/assets/Lobbygif.gif" loading="lazy"></div>
                 <div class="card-content">
                     <h3>Lobby for Games</h3>
-                    <p>Developed lobby using pixijs , JavaScript, HTML ,css, show the game logo animation, player
+                    <p>Developed lobby using PixiJs , JavaScript, HTML ,CSS, show the game logo animation, player
                         profile, transactions history,Social Media .
 
-</Html>.</p>
+</p>
 <div class="tags-container"><span class="tag gold">PixiJS v4.5.5</span><span class="tag">JavaScript</span></div>
 </div>
 </div>
-<div class="card" onclick="playSpin(this)">
+
+<div class="card">
     <div class="card-img"><img src="./src/assets/voodoo.png" loading="lazy"></div>
     <div class="card-content">
         <h3>Voodoo Jackpot</h3>
-        <p>High-volatility 5-reel slot.</p>
+        <p class="game-desc">High-volatility <b>3x5 Slot Engine</b> featuring <b>Progressive Jackpots</b> (3+ Scatter triggers), re-triggerable Free Spins, and Auto-Spin logic.</p>
+        <!-- <div class="mini-features">
+            <span>🎰 3x5 Reels</span>
+            <span>💰 Progressive Jackpots</span>
+            <span>📊 Real-time Logs</span>
+        </div> -->
+        <div class="tags-container">
+        <span class="tag gold">PixiJS</span><span class="tag">GSAP</span><span class="tag">Howler.js</span><span class="tag">JavaScript</span>
+       
+        
+        </div>
     </div>
 </div>
-<div class="card" onclick="playSpin(this)">
+
+<div class="card">
     <div class="card-img"><img src="./src/assets/ApeEmperor.png" loading="lazy"></div>
     <div class="card-content">
         <h3>Ape Emperor</h3>
-        <div class="feature-badges">
-            <span class="f-badge">🎰 5x3 Reel</span>
-            <span class="f-badge">🎁 Free Spins</span>
-            <span class="f-badge">💰 Multipliers</span>
+                <p class="game-desc">Dynamic <b>Blasting Reels</b> gameplay where winning symbols explode to trigger cascading wins, utilizing optimized asset management for web performance.</p>
+
+        <div class="tags-container">
+            <span class="tag gold">PixiJS</span><span class="tag">Spine</span><span class="tag">Logic Dev</span>
         </div>
-        <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
     </div>
 </div>
-<div class="card" onclick="playSpin(this)">
+
+<div class="card">
     <div class="card-img"><img src="./src/assets/dinosaur.png" loading="lazy"></div>
     <div class="card-content">
         <h3>Dinosaur Cash</h3>
-        <div class="feature-badges">
-            <span class="f-badge">🎰 5x3 Reel</span>
-            <span class="f-badge">🎁 Free Spins</span>
-            <span class="f-badge">💰 Multipliers</span>
+        <p class="game-desc">Advanced slot mechanics with <b>Card Picker for Bonus Spins</b>, complex state management, and high-fidelity  animations for immersive play.</p>
+        <div class="tags-container">
+            <span class="tag gold">PixiJS</span><span class="tag">WebGL</span><span class="tag">Physics</span>
         </div>
-        <p>High-volatility slot with complex RNG logic and custom bonus wheels.</p>
     </div>
 </div>
 <div class="card" onclick="playSpin(this)">
@@ -649,17 +651,17 @@
     <div class="footer-grid">
         <div class="footer-col">
             <h3>About Me</h3>
-            <p>Senior Software Engineer specializing in PixiJs and HTML5 Game Development. Experts in creating
-                high-performance
-                casino and slot games using PixiJS, Spine, and GSAP.</p>
+            <p>Senior Software Engineer(Slot Game) with 4+ years of experience in PixiJS Game Development. 
+                I have architected 20+ professional Slot titles and managed a unified lobby for 52+ games.
+                 Expert in WebGL optimization , and GLI Certification workflows.</p>
         </div>
         <div class="footer-col">
             <h3>Quick Links</h3>
             <ul class="footer-links">
                 <li><a href="#">Back to Top</a></li>
-                <li><a href="https://chancesgames.com/">Contact </a></li>
+                <li><a onclick="openContact()">Contact me </a></li>
                 <li><a onclick="openSkills()">Expertise</a></li>
-                <li><a href="./src/Resume/Shubham_Jaiswal_PixiJs_Resume.pdf" download>Resume</a></li>
+                <li><a href="./src/Resume/Shubham_Jaiswal_Resume_2026_01_09.pdf" download>Resume</a></li>
             </ul>
         </div>
         <div class="footer-col">
@@ -755,8 +757,28 @@
             </div>
         </div>
     </div>
+<div id="successModal" class="modal">
+    <div class="modal-content" style="max-width: 480px; border: 2px solid var(--slot-gold); background: #000; box-shadow: 0 0 50px rgba(255, 215, 0, 0.2);">
+        <div style="padding: 40px; text-align: center;">
+            <div style="font-size: 50px; margin-bottom: 15px; animation: pulse-gold 2s infinite;">🛰️</div>
+            
+            <h2 style="color: var(--slot-gold); font-family: 'Courier New', monospace; letter-spacing: 3px; text-transform: uppercase;">
+                 Message Sent Successfully
+            </h2>
+            
+            <div style="height: 2px; background: linear-gradient(90deg, transparent, var(--slot-gold), transparent); margin: 20px 0;"></div>
+            
+            <p style="color: var(--neon-blue); font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6;">
+               Shubham will get back to you shortly
+            </p>
 
-    <div id="successModal" class="modal">
+            <button onclick="closeSuccess()" class="btn cta-btn" style="margin-top: 30px; width: 100%; border-radius: 5px; text-transform: uppercase; font-weight: 900;">
+                Return to Base 🚀
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- <div id="successModal" class="modal">
         <div class="modal-content"
             style="max-width: 450px; text-align: center; border: 2px solid var(--slot-gold); background: #000;">
             <div style="padding: 40px;">
@@ -783,7 +805,7 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
     <div class="footer-bottom">&copy; 2025 Shubham Jaiswal | Built with Passion for Gaming.</div>
 </footer>
@@ -835,13 +857,7 @@
         </div>
     </div>
 </div>
-<!--     called my JavaScript files -->
-<!-- <script src="./background.js"></script>
-<script src="./game.js"></script>
-<script src="./theme.js"></script>
-<script src="./education.js"></script>
-<script src="./contact.js"></script>
-<script src="./main.js"></script> -->
+
 <script src="./background.js"></script>
 <script src="./main.js"></script> <script src="./game.js"></script>
 <script src="./theme.js"></script>

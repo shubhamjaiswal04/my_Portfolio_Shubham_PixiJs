@@ -34,8 +34,8 @@ let app;
         particles = [];
         lineGraphics.clear();
 
-        const totalParticles = mode === 'neon' ? 600 : 400; 
-        const colors = [0x00f2ff, 0x00ff9f, 0xff0055, 0x7000ff];
+        const totalParticles = mode === 'neon' ? 600 : 800; 
+        const colors = [0x00f2ff, 0x00ff9f, 0x7000ff]; //0xff0055, 
 
         for (let i = 0; i < totalParticles; i++) {
             const selectedColor = mode === 'neon' ? colors[Math.floor(Math.random() * colors.length)] : 0x4facfe;

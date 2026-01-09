@@ -109,14 +109,7 @@ function snapToGrid(b) {
     return false;
 }
 
-// function updateUIAfterMatch() {
-//     const scoreElement = document.getElementById('score');
-//     if (scoreElement) scoreElement.innerText = score;
-    
-//     if (typeof updateHighScore === 'function') {
-//         updateHighScore(score);
-//     }
-// }
+
 function updateUIAfterMatch() {
     const scoreElement = document.getElementById('score');
     if (scoreElement) scoreElement.innerText = score;
@@ -175,8 +168,11 @@ function findMatches(r, c, col) {
 
 // FIXED: Side cutting margin calculation
 function getTileCoordinate(r, c) {
-   let x = c * 48.5 + RADIUS + 10 + (r % 2 !== 0 ? RADIUS : 0); 
-    let y = r * (DIAMETER * 0.85) + RADIUS + 5;
+//    let x = c * 48.5 + RADIUS + 10 + (r % 2 !== 0 ? RADIUS : 0); 
+//     let y = r * (DIAMETER * 0.85) + RADIUS + 5;
+//     return { x, y };
+let x = (c * 50) + RADIUS + 12 + (r % 2 !== 0 ? RADIUS : 0); 
+    let y = r * (50 * 0.85) + RADIUS + 5;
     return { x, y };
 }
 
@@ -225,6 +221,7 @@ function update() {
 function draw() {
     if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
     if (!bullet && !isGameOver) {
         ctx.beginPath(); ctx.setLineDash([5, 5]); ctx.moveTo(canvas.width / 2, canvas.height - 30);
         ctx.lineTo(canvas.width/2 + Math.cos(angle)*100, canvas.height-30 + Math.sin(angle)*100);
@@ -233,9 +230,20 @@ function draw() {
     for (let r=0; r<ROWS; r++) for (let c=0; c<COLS; c++) if (grid[r][c].active) drawBubble(getTileCoordinate(r,c).x, getTileCoordinate(r,c).y, grid[r][c].color);
     fallingBubbles.forEach(b => drawBubble(b.x, b.y, b.color));
     gameParticles.forEach(p => { ctx.globalAlpha = p.life; ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(p.x, p.y, p.size, 0, Math.PI*2); ctx.fill(); ctx.globalAlpha = 1; });
-    if (bullet) drawBubble(bullet.x, bullet.y, bullet.color);
-    if (!isGameOver) drawBubble(canvas.width / 2, canvas.height - 30, currentBubbleColor);
-    if (isGameOver) { ctx.fillStyle = 'rgba(0,0,0,0.8)'; ctx.fillRect(0,0,canvas.width,canvas.height); ctx.fillStyle='#fff'; ctx.font='30px Arial'; ctx.textAlign='center'; ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2); }
+    if (bullet) 
+        drawBubble(bullet.x, bullet.y, bullet.color);
+    if (!isGameOver) 
+        drawBubble(canvas.width / 2, canvas.height - 30, currentBubbleColor);
+    if (isGameOver) { 
+        sounds.gameOver.play()
+        ctx.fillStyle = 'rgba(0,0,0,0.8)';
+         ctx.fillRect(0,0,canvas.width,canvas.height);
+          ctx.fillStyle='#fff'; 
+          ctx.font='30px Arial'; 
+          ctx.textAlign='center';
+           ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2); 
+    }
+     sounds.gameOver.stop()
 }
 
 function drawBubble(x, y, col) { ctx.beginPath(); ctx.fillStyle = col; ctx.arc(x, y, RADIUS - 1, 0, Math.PI * 2); ctx.fill(); }
@@ -247,5 +255,7 @@ gameLoop();
 
 // Restart trigger
 function resetGame() { 
+        sounds.click.play();
+
     init(); 
 }
