@@ -55,50 +55,7 @@ function closeSuccess() {
     
 }
 
-// Form Submission Logic
-//const contactForm = document.getElementById('contactForm');
-// if (contactForm) {
-//     contactForm.addEventListener('submit', async function (e) {
-//         e.preventDefault(); //for stop page refresh
-// const emailInput = this.querySelector('input[name="email"]').value;
-//         // Regex jo ensure karta hai ki poora email domain ke saath likha ho
-//         const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-//         if (!emailPattern.test(emailInput)) {
-//             alert("⚠️ Invalid Email! Please provide a complete email (e.g., shubham@gmail.com)");
-//             return; // Form submit nahi hoga
-//         }
-//         const formData = new FormData(this);
-//         const submitBtn = this.querySelector('button[type="submit"]');
-//         submitBtn.innerText = "Sending...";
-//         submitBtn.disabled = true;
-
-//         try {
-//             const response = await fetch(this.action, {
-//                 method: 'POST',
-//                 body: formData,
-//                 headers: { 'Accept': 'application/json' }
-//             });
-
-//             if (response.ok) {
-//                 closeContact(); // Contact form band karein
-//                 openSuccess();  // Thank you modal kholein
-//                 this.reset();   // Form clear karein
-//             } else {
-//                 alert("Oops! Something went wrong. Please try again.");
-//             }
-//         } catch (error) {
-//             alert("Connection error. Please check your internet.");
-//         } finally {
-//             submitBtn.innerText = "Send via Warp 🚀";
-//             submitBtn.disabled = false;
-//         }
-//     });
-// }
-
-
-
-// contact.js
 const contactForm = document.getElementById('contactForm');
 
 if (contactForm) {

@@ -114,14 +114,14 @@ function updateUIAfterMatch() {
     const scoreElement = document.getElementById('score');
     if (scoreElement) scoreElement.innerText = score;
     
-    // LEVEL LOGIC: Har 500 points par level up
+    // LEVEL LOGIC: every 500 points  level up
     let newLevel = Math.floor(score / 500) + 1;
     const levelElement = document.getElementById('current-level');
     
     if (levelElement && parseInt(levelElement.innerText) !== newLevel) {
         levelElement.innerText = newLevel;
         
-        // Difficulty badhane ke liye speed badhayein
+        //  for Difficulty level increase  speed 
         bubbleSpeed = 15 + (newLevel * 2); 
         
         // Toaster message for Level Up
@@ -168,9 +168,6 @@ function findMatches(r, c, col) {
 
 // FIXED: Side cutting margin calculation
 function getTileCoordinate(r, c) {
-//    let x = c * 48.5 + RADIUS + 10 + (r % 2 !== 0 ? RADIUS : 0); 
-//     let y = r * (DIAMETER * 0.85) + RADIUS + 5;
-//     return { x, y };
 let x = (c * 50) + RADIUS + 12 + (r % 2 !== 0 ? RADIUS : 0); 
     let y = r * (50 * 0.85) + RADIUS + 5;
     return { x, y };
@@ -191,7 +188,10 @@ function createBurst(x, y, color) {
     }
 }
 
-function getRandomColor() { return COLORS[Math.floor(Math.random() * COLORS.length)]; }
+function getRandomColor() {
+ return COLORS[Math.floor(Math.random() * COLORS.length)]; 
+    
+    }
 
 function loadLauncher() {
     shotCount++;

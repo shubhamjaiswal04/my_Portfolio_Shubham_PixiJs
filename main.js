@@ -1,26 +1,28 @@
 
-// Disable Right Click
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-});
+// 1. Right click disable
+document.addEventListener('contextmenu', e => e.preventDefault());
 
-// Optional: Disable F12 and Inspect Element shortcuts
+// 2. Disable Keyboard Shortcuts for Inspect Element
 document.onkeydown = function(e) {
-    if (e.keyCode == 123) { // F12
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { // Ctrl+Shift+I
-        return false;
-    }
-    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { // Ctrl+Shift+J
-        return false;
-    }
-    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { // Ctrl+U (View Source)
-        return false;
-    }
+    // Disable F12
+    if (e.keyCode == 123) return false;
+
+    // Disable Ctrl+Shift+I (Inspect)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+
+    // Disable Ctrl+Shift+J (Console)
+    if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+
+    // Disable Ctrl+U (View Source)
+    if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
 };
 
-
+// 3. Console Warning (Agar koi fir bhi khol le)
+setInterval(() => {
+    console.clear();
+    console.log("%cSTOP!", "color: red; font-size: 40px; font-weight: bold;");
+    console.log("%cThis is a protected portfolio. Accessing the source code is not allowed.", "font-size: 18px;");
+}, 1000);
 
 
 
@@ -207,7 +209,7 @@ function stopGif(card) {
 function handleDownload(btn) {
     const loader = btn.querySelector('.btn-loader');
     const text = btn.querySelector('.btn-text');
-    const resumePath = "./src/Resume/Shubham_Jaiswal_Resume_2026_01_09.pdf"; //resume path
+    const resumePath = "./src/Resume/Shubham_Jaiswal_Resume.pdf"; //resume path
 
     // Button Animation
     text.style.display = 'none';
@@ -217,7 +219,7 @@ function handleDownload(btn) {
         // Download Trigger
         const link = document.createElement('a');
         link.href = resumePath;
-        link.download = "Shubham_Jaiswal_Resume_2026_01_09.pdf";
+        link.download = "Shubham_Jaiswal_Resume.pdf";
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
